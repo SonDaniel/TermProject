@@ -18,3 +18,7 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 	RepairDate Date
 );
 
+CREATE TABLE IF NOT EXISTS Service (
+	action varchar(60),
+	cost float(7,2)
+);
