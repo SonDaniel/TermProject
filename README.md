@@ -8,6 +8,8 @@ http://web.csulb.edu/~dbrown/CECS323/Projects/Automotive%20Repair/CECS%20323%20T
 
 [Relational Table](https://www.draw.io/#G0B6-nvjgTV9IpaHc2bDk4TVRNMFE)
 
+[Class Definitions Doc](https://docs.google.com/document/d/18Td7zbFxA8wUFt0JFaGKU8QegxKTErjdLjkv1zJ_TWE/edit?usp=sharing)
+
 ###Files
 * create_view.sql - SQL code for creating table.
 * insert.sql - Insert SQL code for data.
