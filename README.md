@@ -1,7 +1,7 @@
 # TermProject
 
 ###Source
-http://web.csulb.edu/~dbrown/CECS323/Projects/Automotive%20Repair/CECS%20323%20Term%20Project.pdf
+[Project Details and Requirements](http://web.csulb.edu/~dbrown/CECS323/Projects/Automotive%20Repair/CECS%20323%20Term%20Project.pdf)
 
 ###Diagrams
 [UML Diagram](https://www.draw.io/#G0B6-nvjgTV9IpRFhnNGUwME5OcTA)
