@@ -11,7 +11,8 @@
 [Class Definitions Doc](https://docs.google.com/document/d/18Td7zbFxA8wUFt0JFaGKU8QegxKTErjdLjkv1zJ_TWE/edit?usp=sharing)
 
 ###Files
-* create_view.sql - SQL code for creating table.
+* create_table.sql - SQL code for creating the tables.
+* create_view.sql - SQL code for creating views.
 * insert.sql - Insert SQL code for data.
 * query_output.sql - output code for the queries.
 * view_output.sql - Sample outputs.
