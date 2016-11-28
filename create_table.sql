@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
 	# need to add loyaltypoints attribute
-	Email varchar(30),
-
+	Email varchar(30)
+	
 );
 
 CREATE TABLE IF NOT EXISTS VehicleCatalog (
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 );
 
 CREATE TABLE IF NOT EXISTS ServiceItem (
-	ServiceitemID not null primary key AUTO_INCREMENT
+	ServiceitemID int not null primary key AUTO_INCREMENT
 );
 
 CREATE TABLE IF NOT EXISTS RepairLine (
