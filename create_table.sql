@@ -29,12 +29,6 @@ CREATE TABLE IF NOT EXISTS OwnedVehicle (
 	constraint fk_CustomerVehicle foreign key (CustomerID) references Customer (CustomerID)
 );
 
-
-CREATE TABLE IF NOT EXISTS RepairOrder (
-	DateOrdered Date,
-	RepairDate Date
-);
-
 CREATE TABLE IF NOT EXISTS RepairOrder (
 	RepairOrderID int not null primary key AUTO_INCREMENT,
 	DateOrdered datetime,
@@ -54,7 +48,7 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 	# need subcost
 	primary key (ServiceitemID, RepairOrderID),
 	constraint fk_ServiceRepairLine foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
-	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrderID (RepairOrderID)
+	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrder (RepairOrderID)
 );
 
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
