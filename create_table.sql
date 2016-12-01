@@ -44,7 +44,10 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 	RepairDate datetime,
 	#need total Order,
 	VinNumber varchar(20),
-	constraint fk_VehicleRepairOrder foreign key (VinNumber) references OwnedVehicle (VinNumber)
+    ProspectiveID int,
+    TechnicianInstance int,
+	constraint fk_VehicleRepairOrder foreign key (VinNumber) references OwnedVehicle (VinNumber),
+	constraint fk_ServiceTechnician foreign key(TechnicianInstance) references ServiceTechnician(ServiceTechnicianInstance)
 );
 
 CREATE TABLE IF NOT EXISTS ServiceItem (
@@ -54,10 +57,12 @@ CREATE TABLE IF NOT EXISTS ServiceItem (
 CREATE TABLE IF NOT EXISTS RepairLine (
 	ServiceitemID int not null,
 	RepairOrderID int not null,
+    MechanicInstance int not null,
 	# need subcost
 	primary key (ServiceitemID, RepairOrderID),
 	constraint fk_ServiceRepairLine foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
-	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrder (RepairOrderID)
+	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrder (RepairOrderID),
+	constraint fk_Mechanic foreign key(MechanicInstance) references Mechanic (MechanicInstance)
 );
 
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
@@ -78,7 +83,7 @@ CREATE TABLE IF NOT EXISTS IndividualService (
 	ServiceitemID int not null primary key,
 	Service varchar(30),
 	Cost Decimal(13,2),
-	CertificateNeeded varchar(30),
+	CertificateNeeded int,
 	constraint fk_ItemIndividualService foreign key (ServiceitemID) references Serviceitem (ServiceitemID)
 );
 
@@ -96,7 +101,7 @@ CREATE TABLE IF NOT EXISTS PartUsage (
 	PartCatalogID int not null,
 	Quantity int,
 	primary key (IndividualServiceID, Make, Model, Year, PartCatalogID),
-	constraint fk_IndividualServicePartUsage foreign key (IndividualServiceID) references IndividualService (IndividualServiceID),
+	constraint fk_IndividualServicePartUsage foreign key (IndividualServiceID) references IndividualService (ServiceitemID),
 	constraint fk_PartCatalogPartUsage foreign key (PartCatalogID) references PartCatalog (PartCatalogID),
 	constraint fk_VehicleCatalogPartUsage foreign key (Make, Model, Year) references VehicleCatalog (Make, Model, Year)
 );
