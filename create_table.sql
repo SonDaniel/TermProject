@@ -6,11 +6,21 @@ CREATE TABLE IF NOT EXISTS Customer (
 	Email varchar(30)
 	
 );
+CREATE TABLE IF NOT EXISTS Address (
+	CustomerID int not null,
+    AddressType varchar(20),
+	Street varchar(20),
+    AddressNumber int,
+    ZipCode int,
+    PRIMARY KEY (customerID,AddressType),
+	constraint fk_CustomerAddress foreign key (CustomerID) references Customer (CustomerID)
+);
 
 CREATE TABLE IF NOT EXISTS VehicleCatalog (
 	Make varchar(30) not null primary key,
 	Model varchar(30) not null primary key,
 	Year Year(4) not null primary key
+    
 );
 
 CREATE TABLE IF NOT EXISTS OwnedVehicle (
@@ -106,7 +116,6 @@ CREATE TABLE IF NOT EXISTS EmploymentTime(
 	EmployeeID int
 );
 
-
 CREATE TABLE IF NOT EXISTS Mechanic(
 	EmploymentField varchar(30),
 	EmployeeID int not null primary key,
@@ -135,6 +144,6 @@ CREATE TABLE IF NOT EXISTS TempCertificate(
 
 CREATE TABLE IF NOT EXISTS Certificate(
 	CertificateID int not null primary key,
-	CertificateLevel,
-	ServiceType varchar(30)
+	CertificateLevel int,
+	ServiceType varchar(30) not null
 );
