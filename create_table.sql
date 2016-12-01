@@ -2,8 +2,9 @@
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
-	# need to add loyaltypoints attribute
-	Email varchar(30)
+	loyaltyPoints int,
+	Email varchar(30),
+	Adress varchar(30)
 	
 );
 
@@ -34,7 +35,7 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 	DateOrdered datetime,
 	RepairDate datetime,
 	#need total Order,
-	VinNumber int,
+	VinNumber varchar(20),
 	constraint fk_VehicleRepairOrder foreign key (VinNumber) references OwnedVehicle (VinNumber)
 );
 
