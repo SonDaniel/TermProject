@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
-	# need to add loyaltypoints attribute
+	loyaltyPoints int,
 	Email varchar(30)
 	
 );
@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS Address (
 );
 
 CREATE TABLE IF NOT EXISTS VehicleCatalog (
-	Make varchar(30) not null primary key,
-	Model varchar(30) not null primary key,
-	Year Year(4) not null primary key
-    
+	Make varchar(30) not null,
+	Model varchar(30) not null,
+	Year Year(4) not null,
+	primary key (Make, Model, Year)
 );
 
 CREATE TABLE IF NOT EXISTS OwnedVehicle (
@@ -38,18 +38,12 @@ CREATE TABLE IF NOT EXISTS OwnedVehicle (
 	constraint fk_CustomerVehicle foreign key (CustomerID) references Customer (CustomerID)
 );
 
-
-CREATE TABLE IF NOT EXISTS RepairOrder (
-	DateOrdered Date,
-	RepairDate Date
-);
-
 CREATE TABLE IF NOT EXISTS RepairOrder (
 	RepairOrderID int not null primary key AUTO_INCREMENT,
 	DateOrdered datetime,
 	RepairDate datetime,
 	#need total Order,
-	VinNumber int,
+	VinNumber varchar(20),
 	constraint fk_VehicleRepairOrder foreign key (VinNumber) references OwnedVehicle (VinNumber)
 );
 
@@ -58,11 +52,12 @@ CREATE TABLE IF NOT EXISTS ServiceItem (
 );
 
 CREATE TABLE IF NOT EXISTS RepairLine (
-	ServiceitemID int not null primary key,
-	RepairOrderID int not null primary key,
+	ServiceitemID int not null,
+	RepairOrderID int not null,
 	# need subcost
+	primary key (ServiceitemID, RepairOrderID),
 	constraint fk_ServiceRepairLine foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
-	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrderID (RepairOrderID)
+	constraint fk_OrderRepairLine foreign key (RepairOrderID) references RepairOrder (RepairOrderID)
 );
 
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
@@ -72,8 +67,9 @@ CREATE TABLE IF NOT EXISTS MaintenancePackage (
 );
 
 CREATE TABLE IF NOT EXISTS ServicePackageLine (
-	ServiceitemID int not null primary key,
-	MaintainancePackageID int not null primary key,
+	ServiceitemID int not null,
+	MaintainancePackageID int not null,
+	primary key (ServiceitemID, MaintainancePackageID),
 	constraint fk_PackageLineMaintainancePackage foreign key (MaintainancePackageID) references MaintenancePackage (ServiceitemID),
 	constraint fk_PackageLineService foreign key (ServiceitemID) references ServiceItem (ServiceitemID)
 );
@@ -93,12 +89,13 @@ CREATE TABLE IF NOT EXISTS PartCatalog (
 );
 
 CREATE TABLE IF NOT EXISTS PartUsage (
-	IndividualServiceID int not null primary key,
-	Make varchar(30) not null primary key,
-	Model varchar(30) not null primary key,
-	Year Year(4) not null primary key,
-	PartCatalogID int not null primary key,
+	IndividualServiceID int not null,
+	Make varchar(30) not null,
+	Model varchar(30) not null,
+	Year Year(4) not null,
+	PartCatalogID int not null,
 	Quantity int,
+	primary key (IndividualServiceID, Make, Model, Year, PartCatalogID),
 	constraint fk_IndividualServicePartUsage foreign key (IndividualServiceID) references IndividualService (IndividualServiceID),
 	constraint fk_PartCatalogPartUsage foreign key (PartCatalogID) references PartCatalog (PartCatalogID),
 	constraint fk_VehicleCatalogPartUsage foreign key (Make, Model, Year) references VehicleCatalog (Make, Model, Year)
@@ -122,6 +119,12 @@ CREATE TABLE IF NOT EXISTS Mechanic(
 	constraint fk_Mechanic foreign key (EmployeeID) references Employee (EmployeeID)
 );
 
+CREATE TABLE IF NOT EXISTS Mechanic(
+	EmploymentField varchar(30),
+	EmployeeID int not null primary key,
+	constraint fk_Mechanic foreign key (EmployeeID) references Employee (EmployeeID)
+);
+
 CREATE TABLE IF NOT EXISTS ServiceTechnician(
 	EmploymentField varchar(30),
 	EmployeeID int not null primary key,
@@ -129,21 +132,25 @@ CREATE TABLE IF NOT EXISTS ServiceTechnician(
 );
 
 CREATE TABLE IF NOT EXISTS MentorShip(
-	EmployeeID int not null primary key,
-	MentorID int not null primary key,
-	Skill varchar(30) not null primary key,
+	EmployeeID int not null,
+	MentorID int not null,
+	Skill varchar(30) not null,
 	Stop datetime,
-	Start datetime
+	Start datetime,
+	primary key (EmployeeID, MentorID, Skill)
 );
 CREATE TABLE IF NOT EXISTS TempCertificate(
-	EmployeeID int not null primary key,
-	CertificateID int not null primary key,
-	Skill int not null primary key,
-	CertificateName varchar(30)
+	EmployeeID int not null,
+	CertificateID int not null,
+	Skill int not null,
+	CertificateName varchar(30),
+	primary key (EmployeeID, CertificateID, Skill)
 );
 
 CREATE TABLE IF NOT EXISTS Certificate(
 	CertificateID int not null primary key,
-	CertificateLevel int,
-	ServiceType varchar(30) not null
+	CertificateLevel,
+	ServiceType varchar(30)
 );
+
+
