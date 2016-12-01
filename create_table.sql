@@ -6,11 +6,21 @@ CREATE TABLE IF NOT EXISTS Customer (
 	Email varchar(30)
 	
 );
+CREATE TABLE IF NOT EXISTS Address (
+	CustomerID int not null,
+    AddressType varchar(20),
+	Street varchar(20),
+    AddressNumber int,
+    ZipCode int,
+    PRIMARY KEY (customerID,AddressType),
+	constraint fk_CustomerAddress foreign key (CustomerID) references Customer (CustomerID)
+);
 
 CREATE TABLE IF NOT EXISTS VehicleCatalog (
 	Make varchar(30) not null primary key,
 	Model varchar(30) not null primary key,
 	Year Year(4) not null primary key
+    
 );
 
 CREATE TABLE IF NOT EXISTS OwnedVehicle (
@@ -93,5 +103,47 @@ CREATE TABLE IF NOT EXISTS PartUsage (
 	constraint fk_PartCatalogPartUsage foreign key (PartCatalogID) references PartCatalog (PartCatalogID),
 	constraint fk_VehicleCatalogPartUsage foreign key (Make, Model, Year) references VehicleCatalog (Make, Model, Year)
 );
+/*Employee Part*/
+CREATE TABLE IF NOT EXISTS Employee (
+	EmployeeID int not null primary key,
+	EFirstName varchar(30),
+	ELastName  varchar(30),
+	Phone int
+);
+CREATE TABLE IF NOT EXISTS EmploymentTime(
+	DateRetired int not null primary key,
+	DateEmployed int,
+	EmployeeID int
+);
 
+CREATE TABLE IF NOT EXISTS Mechanic(
+	EmploymentField varchar(30),
+	EmployeeID int not null primary key,
+	constraint fk_Mechanic foreign key (EmployeeID) references Employee (EmployeeID)
+);
 
+CREATE TABLE IF NOT EXISTS ServiceTechnician(
+	EmploymentField varchar(30),
+	EmployeeID int not null primary key,
+	constraint fk_ServiceTechnician foreign key (EmployeeID) references Employee (EmployeeID)
+);
+
+CREATE TABLE IF NOT EXISTS MentorShip(
+	EmployeeID int not null primary key,
+	MentorID int not null primary key,
+	Skill varchar(30) not null primary key,
+	Stop datetime,
+	Start datetime
+);
+CREATE TABLE IF NOT EXISTS TempCertificate(
+	EmployeeID int not null primary key,
+	CertificateID int not null primary key,
+	Skill int not null primary key,
+	CertificateName varchar(30)
+);
+
+CREATE TABLE IF NOT EXISTS Certificate(
+	CertificateID int not null primary key,
+	CertificateLevel int,
+	ServiceType varchar(30) not null
+);
