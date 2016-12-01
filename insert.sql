@@ -44,25 +44,25 @@ insert into customer(CustomerID,Phone,email)#9
  insert into customer(CustomerID,Phone,email)#10
  values(1287,2153-237-2411,'Damn@Daniel.com');
  
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1982,'home','Wew St.',124,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(003,'home','feel St',522,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(004,'home','zero St.',134,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(21,'home','fronge St',4202,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(57,'home','Wew AV.',125,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(5,'home','Noice Lane',627,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(109,'home','Colombus Ave.',184,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1021,'home','cat St',5444,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1291,'Coporate HQ','Gold way.',1812,11111);
- insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1287,'Corporate HQ','Silver St',0011,11111);
  
 insert into VehicleCatalog(Make,Model, Year)#1
