@@ -23,7 +23,6 @@ insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (10,'Derik','Derikson', '1111111119');
 
 
-
 insert into Customer(CustomerID,Phone,email)#1
  values(1982,710-562-2011,'Bobsherman@hotmail.com');
 insert into Customer(CustomerID,Phone,email)#2
@@ -32,7 +31,7 @@ insert into Customer(CustomerID,Phone,email)#3
  values(004,911-911-9111,'about4turtles@gmail.com');
 insert into Customer(CustomerID,Phone,email)#4
  values(21, 010-021-1997,'fake@Fakemail.com');
-insert into Customer(CustomerID,Phone,mail)#5
+insert into Customer(CustomerID,Phone,email)#5
  values(57, 310-210-2879,'rocker@hooner.com');
 insert into Customer(CustomerID,Phone,email)#6
  values(5, 661-287-2882,'about5@gmail.com');
@@ -43,7 +42,7 @@ insert into customer(CustomerID,Phone,email)#8
 insert into customer(CustomerID,Phone,email)#9
  values(1291,021-427-1231,'Matt@Matt.com');
  insert into customer(CustomerID,Phone,email)#10
- values(1287,2153-237-2411,'Damn@Daniel.com'); 
+ values(1287,2153-237-2411,'Damn@Daniel.com');
  
  insert into Adress(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1982,'home','Wew St.',124,11111);
@@ -88,3 +87,67 @@ insert into VehicleCatalog(Make,Model, Year)#10
 values('Acura','NSX',2018);
 insert into VehicleCatalog(Make,Model, Year)#11
 values('DanielSon','CardboardBox',3000);
+
+insert into Contracted (CustomerID)
+values (1982);
+insert into Contracted (CustomerID)
+values (003);
+insert into Contracted (CustomerID)
+values (004);
+insert into Contracted (CustomerID)
+values (21);
+insert into Contracted (CustomerID)
+values (57);
+insert into Contracted (CustomerID)
+values (5);
+insert into Contracted (CustomerID)
+values (1291);
+insert into Contracted (CustomerID)
+values (1287);
+
+
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
+values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false);
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
+values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false);
+
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1291, 1000000);
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1287, 1000000);
+
+
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(1982,0,69);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(003,0,619);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(004,0,2600);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(21,0,2000);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(57,0,500);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(5,0,6900);
+
+
+insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
+values (1,null,1291,'1/1/2016','wire',100000), (2,null,1291,'2/1/2016','wire',100000),(3,null,1287,'1/1/2016','wire',100000), (4,null,1287,'2/1/2016','wire',100000);
+
+insert into Coporation(CustomerID,CorpName)
+values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
+
+insert into Individual(CustomerID,FirstName,LastName)
+values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
+
+insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
+values(null,'2/13/2006',1),(null,'2/13/2006',2),(null,'2/13/2006',3),(null,'2/13/2006',4),(null,'2/13/2006',5),(null,'2/13/2006',6),(null,'2/13/2006',7),(null,'2/13/2006',8),(null,'2/13/2006',9),(null,'2/13/2006',10);
+
+insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
+values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
+
+insert into Mechanic(EmploymentField,ServiceTechnicianInstance)
+values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7)
+
+
+

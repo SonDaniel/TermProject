@@ -153,7 +153,8 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
     ProspectiveID int,
     ServiceTechnicianInstance int,
 	constraint fk_VehicleRepairOrders foreign key (VinNumbers) references OwnedVehicle (VinNumber),
-	constraint fk_ServiceTechnicians foreign key(ServiceTechnicianInstance) references ServiceTechnician(ServiceTechnicianInstance)
+	constraint fk_prospectivecustomerid foreign key(ProspectiveID) references ProspectiveCustomer(CustomerID),
+    constraint fk_ServiceTechnicians foreign key(ServiceTechnicianInstance) references ServiceTechnician(ServiceTechnicianInstance)
 );
 
 CREATE TABLE IF NOT EXISTS ServiceItem (
@@ -212,3 +213,6 @@ CREATE TABLE IF NOT EXISTS PartUsage (
 	constraint fk_VehicleCatalogPartUsage foreign key (Make, Model, Year) references VehicleCatalog (Make, Model, Year)
 );
 
+CREATE TABLE IF NOT EXISTS HOLIDAY(
+	HolidayDate date not null primary key
+);
