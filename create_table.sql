@@ -2,7 +2,6 @@
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
-	loyaltyPoints int,
 	Email varchar(30)
 	
 );
@@ -152,6 +151,57 @@ CREATE TABLE IF NOT EXISTS MentorShip(
     constraint fk_Mentee foreign key(MenteeInstance) references Mechanic (MechanicInstances)
 );
 
+CREATE TABLE IF NOT EXISTS Corporation (
+	CustomerID int not null primary key,
+	CorpName varchar(20),
+	constraint fk_CustomerIDCorp foreign key (CustomerID) references Customer (CustomerID)
+);
 
+CREATE TABLE IF NOT EXISTS Individual (
+	CustomerID int not null primary key,
+	FirstName varchar(20),
+	LastName varchar(20),
+	constraint fk_CustomerIDIndividual foreign key (CustomerID) references Customer (CustomerID)
+);
 
+CREATE TABLE IF NOT EXISTS Contracted (
+	CustomerID int not null primary key,
+	constraint fk_ContractedCustomer foreign key (CustomerID) references Customer (CustomerID)
+);
 
+CREATE TABLE IF NOT EXISTS SteadyCustomer (
+	CustomerID int not null primary key,
+	LoyaltyPoints int,
+	amountSpent Decimal(13,2),
+	constraint fk_SteadyCustomerContracted foreign key (CustomerID) references Contracted (CustomerID)
+);
+
+CREATE TABLE IF NOT EXISTS PremiumCustomer (
+	CustomerID int not null primary key,
+	AnnualFee Decimal(13,2),
+	constraint fk_PremiumCustomerID foreign key (CustomerID) references Contracted (CustomerID)
+);
+
+CREATE TABLE IF NOT EXISTS ProspectiveCustomer (
+	CustomerID int not null primary key,
+	ContractedID int,
+	SpecialPromotion varchar(30),
+	EmailsSent boolean,
+	ReferralCode varchar(20),
+	ReferralAwards varchar(20),
+	referralAwardsUsed boolean,
+	constraint fk_CustomerIDProspective foreign key (CustomerID) references Customer (CustomerID),
+	constraint fk_ConstraintIDContracted foreign key (ContractedID) references Contracted (ContractedID)
+);
+
+CREATE TABLE IF NOT EXISTS MonthlyPayments (
+	PaymentID int not null primary key auto_increment,
+	ProspectiveID int,
+	CustomerID int,
+	DateBilled Date,
+	PaymentMethods varchar(20),
+	MonthlyCost Decimal(13,2),
+	constraint fk_CustomerIDMonthly foreign key (CustomerID) references PremiumCustomer (CustomerID),
+	constraint fk_ProspectiveIDMonthly foreign key (ProspectiveID) references Prospective,
+	constraint uk_MonthlyBill unique (CustomerID, DateBilled)
+);
