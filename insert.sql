@@ -87,3 +87,48 @@ insert into VehicleCatalog(Make,Model, Year)#10
 values('Acura','NSX',2018);
 insert into VehicleCatalog(Make,Model, Year)#11
 values('DanielSon','CardboardBox',3000);
+
+insert into Contracted (CustomerID)
+values (1982);
+insert into Contracted (CustomerID)
+values (003);
+insert into Contracted (CustomerID)
+values (004);
+insert into Contracted (CustomerID)
+values (21);
+insert into Contracted (CustomerID)
+values (57);
+insert into Contracted (CustomerID)
+values (5);
+insert into Contracted (CustomerID)
+values (1291);
+insert into Contracted (CustomerID)
+values (1287);
+
+
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
+values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false);
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
+values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false);
+
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1291, 1000000);
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1287, 1000000);
+
+
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(1982,0,69);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(003,0,619);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(004,0,2600);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(21,0,2000);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(57,0,500);
+insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
+values(5,0,6900);
+
+
+
