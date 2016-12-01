@@ -19,3 +19,28 @@ insert into customer(CustomerID,Phone,email)#9
  values(1291,021-427-1231,'Matt@ALex.com');
  insert into customer(CustomerID,Phone,email)#10
  values(1287,2153-237-2411,'Damn@Daniel.com');
+
+insert into VehicleCatalog(Make,Model, Year)#1
+values('Challenger','Mk2',1998);
+insert into VehicleCatalog(Make,Model, Year)#2
+values('Nissan','370z',2016);
+insert into VehicleCatalog(Make,Model, Year)#3
+values('Subaru','BRZ',2016);
+insert into VehicleCatalog(Make,Model, Year)#4
+values('Mazda','MX-5',2018);
+insert into VehicleCatalog(Make,Model, Year)#5
+values('Mazda','Rx-7',1998);
+insert into VehicleCatalog(Make,Model, Year)#6
+values('Ford','GT',2013);
+insert into VehicleCatalog(Make,Model, Year)#7
+values('Dodge','Hellcat',2015);
+insert into VehicleCatalog(Make,Model, Year)#8
+values('Toyota','AE86',1983);
+insert into VehicleCatalog(Make,Model, Year)#9
+values('Toyota','Supra',1992);
+insert into VehicleCatalog(Make,Model, Year)#10
+values('Acura','NSX',2018);
+insert into VehicleCatalog(Make,Model, Year)#11
+values('DanielSon','CardboardBox',3000);
+
+
