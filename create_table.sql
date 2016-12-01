@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS EmploymentTime(
 CREATE TABLE IF NOT EXISTS Mechanic(
 	EmploymentField varchar(30),
 	MechanicInstance int not null primary key,
-	constraint fk_Mechanic foreign key (MechanicInstance) references EmployeeTime (EmployeeInstance)
+	constraint fk_Mechanic foreign key (MechanicInstance) references EmploymentTime (EmployeeInstance)
 );
 
 CREATE TABLE IF NOT EXISTS ServiceTechnician(
