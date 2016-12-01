@@ -3,8 +3,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
 	loyaltyPoints int,
-	Email varchar(30),
-	Adress varchar(30)
+	Email varchar(30)
 	
 );
 
