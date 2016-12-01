@@ -149,8 +149,8 @@ CREATE TABLE IF NOT EXISTS TempCertificate(
 
 CREATE TABLE IF NOT EXISTS Certificate(
 	CertificateID int not null primary key,
-	CertificateLevel,
-	ServiceType varchar(30)
+	CertificateLevel int,
+	ServiceType varchar(30) not null
 );
 
 
