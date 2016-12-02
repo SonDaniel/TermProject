@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS MentorShip(
 	MenteeInstance int not null,
 	MentorInstance int not null,
 	CertificateID int not null,
-	StopTime datetime,
-	StartTime datetime,
+	StopTime date,
+	StartTime date,
 	primary key (MenteeInstance,MentorInstance,CertificateID),
     constraint fk_MentorShip foreign key (MentorInstance,CertificateID) references TempCertificate (MechanicInstance,CertificateID),
     constraint fk_Mentee foreign key(MenteeInstance) references Mechanic (MechanicInstance)

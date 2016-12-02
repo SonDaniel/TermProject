@@ -222,3 +222,12 @@ insert into TempCertificate(MechanicInstance,CertificateID)
 values(6,10),(6,11),(6,12);
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);
+
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (3,7,9,'10-7-2007','12-7-2007');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (2,1,5,'4-17-2007','8-29-2007');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (2,4,6,'8-30-2007','2-5-2008');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (1,4,6,'3-1-2006','4-29-2006');
