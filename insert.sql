@@ -146,8 +146,77 @@ values(null,'2006-02-13',1),(null,'2006-02-13',2),(null,'2006-02-13',3),(null,'2
 insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
 values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
 
-insert into Mechanic(EmploymentField,MechanicInstance)
-values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7)
+	insert into Mechanic(EmploymentField,MechanicInstance)
+	values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7);
 
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(1,'oil filter',6.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(2,'oil',17.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(3,'Tires',99.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(4,'Rims',99.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(5,'BreakPads',25.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(6,'Air Filters',29.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(7,'WindShield Wipers',25.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(8,'Spark Plug',10.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(9,'Fuel Filters',31.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(10,'Air Intake',44.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(11,'Timing Belts',16.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(12,'coilovers', 149.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(13,'Fuse',2.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(14,'bolts',2.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(15,'Battery',209.99);
+insert into PartCatalog(PartCatalogID,PartName,Cost)
+values(16,'Wind Shield',999.99);
 
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(1,1,'oil change');
 
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(2,1,'change oil filter');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(3,1,'Air Filter Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(5,2,'Tire Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(6,2,'Break Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(7,2,'Rim Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(8,1,'Wind Shield Replacement');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(9,2,'Battery Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(1,1,'oil change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(10,3,'Suspensension Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(11,2,'Spark Plug Change');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(12,3,'Air Intake');
+
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(13,3,'Windshield Replacement');
