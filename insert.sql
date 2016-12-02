@@ -146,8 +146,8 @@ values(null,'2006-02-13',1),(null,'2006-02-13',2),(null,'2006-02-13',3),(null,'2
 insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
 values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
 
-	insert into Mechanic(EmploymentField,MechanicInstance)
-	values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7);
+insert into Mechanic(EmploymentField,MechanicInstance)
+values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7);
 
 insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(1,'oil filter',6.99);
@@ -184,39 +184,41 @@ values(16,'Wind Shield',999.99);
 
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(1,1,'oil change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(2,1,'change oil filter');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(3,1,'Air Filter Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(5,2,'Tire Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(6,2,'Break Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(7,2,'Rim Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
-values(8,1,'Wind Shield Replacement');
-
+values(8,1,'Wind Shield Wipers Replacement');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(9,2,'Battery Change');
-
-insert into Certificate(CertificateID,CertificateLevel,ServiceType)
-values(1,1,'oil change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(10,3,'Suspensension Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(11,2,'Spark Plug Change');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(12,3,'Air Intake');
-
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(13,3,'Windshield Replacement');
+
+
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(1,1),(1,2),(1,5),(1,8),(1,12);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(2,3),(2,9),(2,10),(2,11);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(3,1),(3,2),(3,5),(3,7);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(4,3),(4,5),(4,6),(4,12);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(5,1),(5,2);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(6,10),(6,11),(6,12);
+insert into TempCertificate(MechanicInstance,CertificateID) 
+values(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);

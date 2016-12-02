@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS Certificate(
 CREATE TABLE IF NOT EXISTS TempCertificate(
 	MechanicInstance int not null,
 	CertificateID int not null,
-	CertificateName varchar(30),
 	primary key (MechanicInstance, CertificateID),
     constraint fk_TempCertificate foreign key(MechanicInstance) references Mechanic (MechanicInstance),
     constraint fk_Certificate foreign key(CertificateID) references Certificate (CertificateID)
