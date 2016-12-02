@@ -222,3 +222,48 @@ insert into TempCertificate(MechanicInstance,CertificateID)
 values(6,10),(6,11),(6,12);
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);
+
+insert into ServiceItem(ServiceitemID)
+values(1);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(1, 'Oil change package');
+insert into ServiceItem(ServiceitemID)
+values(2);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(2, 'Tire change package');
+insert into ServiceItem(ServiceitemID)
+values(3);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(3, 'Air Filter Change Package');
+insert into ServiceItem(ServiceitemID)
+values(4);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(4, 'Suspension Change Package');
+insert into ServiceItem(ServiceitemID)
+values(5);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(5, 'Wheel Change Package');
+insert into ServiceItem(ServiceitemID)
+values(6);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(6, 'Battery change package');
+insert into ServiceItem(ServiceitemID)
+values(7);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(7, 'oil change package');
+insert into ServiceItem(ServiceitemID)
+values(8);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(8, 'Fuse change package');
+insert into ServiceItem(ServiceitemID)
+values(9);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(9, 'Belt change package');
+insert into ServiceItem(ServiceitemID)
+values(10);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(10, 'Break change package');
+insert into ServiceItem(ServiceitemID)
+values(11);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(11, 'WindShield change package');
