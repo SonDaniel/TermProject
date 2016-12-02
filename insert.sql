@@ -267,3 +267,13 @@ insert into ServiceItem(ServiceitemID)
 values(11);
 insert into MaintenancePackage(ServiceitemID,PackageTitle)
 values(11, 'WindShield change package');
+
+
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (3,7,9,'10-7-2007','12-7-2007');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (2,1,5,'4-17-2007','8-29-2007');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (2,4,6,'8-30-2007','2-5-2008');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (1,4,6,'3-1-2006','4-29-2006');
