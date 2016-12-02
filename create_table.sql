@@ -4,13 +4,14 @@ CREATE TABLE IF NOT EXISTS Employee (
 	EmployeeID int not null primary key,
 	EFirstName varchar(30),
 	ELastName  varchar(30),
-	Phone int,
+	Phone varchar(11),
 	Constraint UC_Employee_ID UNIQUE (EFirstName,ELastName,Phone)
 );
+
 CREATE TABLE IF NOT EXISTS EmploymentTime(
 	EmployeeInstance int not null auto_increment primary key,
-	DateRetired int not null,
-	DateEmployed int,
+	DateRetired Date,
+	DateEmployed Date not null,
 	EmployeeID int,
     Constraint UC_EmployeeInstance UNIQUE (DateEmployed,EmployeeID),
     constraint fk_EmployeeID foreign key (EmployeeID) references Employee (EmployeeID)
@@ -27,11 +28,13 @@ CREATE TABLE IF NOT EXISTS ServiceTechnician(
 	ServiceTechnicianInstance int not null primary key,
 	constraint fk_ServiceTechnician foreign key  (ServiceTechnicianInstance) references EmploymentTime (EmployeeInstance)
 );
+
 CREATE TABLE IF NOT EXISTS Certificate(
 	CertificateID int not null primary key,
 	CertificateLevel int,
 	ServiceType varchar(30) not null
 );
+
 CREATE TABLE IF NOT EXISTS TempCertificate(
 	MechanicInstance int not null,
 	CertificateID int not null,
@@ -40,6 +43,7 @@ CREATE TABLE IF NOT EXISTS TempCertificate(
     constraint fk_TempCertificate foreign key(MechanicInstance) references Mechanic (MechanicInstance),
     constraint fk_Certificate foreign key(CertificateID) references Certificate (CertificateID)
 );
+
 CREATE TABLE IF NOT EXISTS MentorShip(
 	MenteeInstance int not null,
 	MentorInstance int not null,
@@ -50,12 +54,13 @@ CREATE TABLE IF NOT EXISTS MentorShip(
     constraint fk_MentorShip foreign key (MentorInstance,CertificateID) references TempCertificate (MechanicInstance,CertificateID),
     constraint fk_Mentee foreign key(MenteeInstance) references Mechanic (MechanicInstance)
 );
+
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(11),
 	Email varchar(30)
-	
 );
+
 CREATE TABLE IF NOT EXISTS Address (
 	CustomerID int not null,
     AddressType varchar(20),
@@ -103,7 +108,7 @@ CREATE TABLE IF NOT EXISTS ProspectiveCustomer (
 	SpecialPromotion varchar(30),
 	EmailsSent boolean,
 	ReferralCode varchar(20),
-	ReferralAwards varchar(20),
+	ReferralAwards varchar(100),
 	referralAwardsUsed boolean,
 	constraint fk_CustomerIDProspective foreign key (CustomerID) references Customer (CustomerID),
 	constraint fk_ConstraintIDContracted foreign key (ContractedID) references Contracted (CustomerID)
