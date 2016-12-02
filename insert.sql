@@ -37,11 +37,11 @@ insert into Customer(CustomerID,Phone,email)#6
  values(5, 661-287-2882,'about5@gmail.com');
 insert into Customer(CustomerID,Phone,email)#7
  values(109, 182-283-2918,'Customer@customermail.com');
-insert into customer(CustomerID,Phone,email)#8
+insert into Customer(CustomerID,Phone,email)#8
  values(1021,003-007-1021,'Fighter@jet.com');
-insert into customer(CustomerID,Phone,email)#9
+insert into Customer(CustomerID,Phone,email)#9
  values(1291,021-427-1231,'Matt@Matt.com');
- insert into customer(CustomerID,Phone,email)#10
+ insert into Customer(CustomerID,Phone,email)#10
  values(1287,2153-237-2411,'Damn@Daniel.com');
  
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
@@ -86,7 +86,7 @@ values('Toyota','Supra',1992);
 insert into VehicleCatalog(Make,Model, Year)#10
 values('Acura','NSX',2018);
 insert into VehicleCatalog(Make,Model, Year)#11
-values('DanielSon','CardboardBox',3000);
+values('DanielSon','CardboardBox',1889);
 
 insert into Contracted (CustomerID)
 values (1982);
@@ -132,21 +132,21 @@ values(5,0,6900);
 
 
 insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
-values (1,null,1291,'1/1/2016','wire',100000), (2,null,1291,'2/1/2016','wire',100000),(3,null,1287,'1/1/2016','wire',100000), (4,null,1287,'2/1/2016','wire',100000);
+values (1,null,1291,'2016-01-01','wire',100000), (2,null,1291,'2016-02-01','wire',100000),(3,null,1287,'2016-01-01','wire',100000), (4,null,1287,'2016-02-01','wire',100000);
 
-insert into Coporation(CustomerID,CorpName)
+insert into Corporation(CustomerID,CorpName)
 values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
 
 insert into Individual(CustomerID,FirstName,LastName)
 values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
 
 insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
-values(null,'2/13/2006',1),(null,'2/13/2006',2),(null,'2/13/2006',3),(null,'2/13/2006',4),(null,'2/13/2006',5),(null,'2/13/2006',6),(null,'2/13/2006',7),(null,'2/13/2006',8),(null,'2/13/2006',9),(null,'2/13/2006',10);
+values(null,'2006-02-13',1),(null,'2006-02-13',2),(null,'2006-02-13',3),(null,'2006-02-13',4),(null,'2006-02-13',5),(null,'2006-02-13',6),(null,'2006-02-13',7),(null,'2006-02-13',8),(null,'2006-02-13',9),(null,'2006-02-13',10);
 
 insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
 values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
 
-insert into Mechanic(EmploymentField,ServiceTechnicianInstance)
+insert into Mechanic(EmploymentField,MechanicInstance)
 values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7)
 
 
