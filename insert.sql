@@ -86,7 +86,7 @@ values('Toyota','Supra',1992);
 insert into VehicleCatalog(Make,Model, Year)#10
 values('Acura','NSX',2018);
 insert into VehicleCatalog(Make,Model, Year)#11
-values('DanielSon','CardboardBox',1889);
+values('DanielSon','CardboardBox',1928);
 
 insert into Contracted (CustomerID)
 values (1982);
