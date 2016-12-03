@@ -41,11 +41,7 @@ insert into Customer(CustomerID,Phone,email)#8
  values(1021,003-007-1021,'Fighter@jet.com');
 insert into Customer(CustomerID,Phone,email)#9
  values(1291,021-427-1231,'Matt@Matt.com');
-<<<<<<< HEAD
  insert into customer(CustomerID,Phone,email)#10
-=======
- insert into Customer(CustomerID,Phone,email)#10
->>>>>>> refs/remotes/origin/master
  values(1287,2153-237-2411,'Damn@Daniel.com');
  
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
@@ -137,7 +133,7 @@ values(5,0,6900);
 
 
 insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
-values (1,null,1291,'1/1/2016','wire',100000), (2,null,1291,'2/1/2016','wire',100000),(3,null,1287,'1/1/2016','wire',100000), (4,null,1287,'2/1/2016','wire',100000);
+values (1,null,1291,'01-01-2016','wire',100000), (2,null,1291,'02-01-2016','wire',100000),(3,null,1287,'01-01-2016','wire',100000), (4,null,1287,'02-01-2016','wire',100000);
 
 
 
@@ -228,52 +224,7 @@ values(5,1),(5,2);
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(6,10),(6,11),(6,12);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(7,1),(7,2),(7,3),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);
-
-insert into ServiceItem(ServiceitemID)
-values(1);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(1, 'Oil change package');
-insert into ServiceItem(ServiceitemID)
-values(2);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(2, 'Tire change package');
-insert into ServiceItem(ServiceitemID)
-values(3);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(3, 'Air Filter Change Package');
-insert into ServiceItem(ServiceitemID)
-values(4);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(4, 'Suspension Change Package');
-insert into ServiceItem(ServiceitemID)
-values(5);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(5, 'Wheel Change Package');
-insert into ServiceItem(ServiceitemID)
-values(6);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(6, 'Battery change package');
-insert into ServiceItem(ServiceitemID)
-values(7);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(7, 'oil change package');
-insert into ServiceItem(ServiceitemID)
-values(8);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(8, 'Fuse change package');
-insert into ServiceItem(ServiceitemID)
-values(9);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(9, 'Belt change package');
-insert into ServiceItem(ServiceitemID)
-values(10);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(10, 'Break change package');
-insert into ServiceItem(ServiceitemID)
-values(11);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(11, 'WindShield change package');
+values(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);
 
 
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
@@ -284,4 +235,35 @@ insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,Sto
 values (2,4,6,'8-30-2007','2-5-2008');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
 values (1,4,6,'3-1-2006','4-29-2006');
+
+insert into HOLIDAY(holidayDay, holidayMonth)
+insert (31,12),(25,12),(25,11),(24,11),(11,11),(10,10),(5,9),(4,7),(19,6),(30,5),(8,5),(15,4),(15,2),
+(18,1),(1,1);
+
+
+insert into ServiceItem(ServiceitemID)
+values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23);
+insert into MaintenancePackage(ServiceitemID,PackageTitle)
+values(1, 'Oil change package'),(2, 'Tire change package'),(3, 'Air Filter Change Package'),(4, 'Suspension Change Package'),
+(5, 'Wheel Change Package'),(6, 'Battery change package'),(7, 'oil change package'),(8, 'Fuse change package'),
+(9, 'Belt change package'),(10, 'Break change package'),(11, 'WindShield change package');
+
+insert into IndividualService(ServiceItemID,Service,Cost,CertificateNeeded)
+values (12,'change oil', 50.55,1),(12,'change oil filter', 100.55,2),(14,'change tire', 50.55,5)
+,(15,'change air filter', 95.55,3),(16,'fix air intake', 150.55,12),(17,'break change', 150.55,6)
+,(18,'change rim', 250.55,7),(19,'repair windshield wipers', 80.55,8), (20,'replace battery', 200.55,9)
+,(21,'change suspension', 450.55,10),(22,'change spark plug', 50.55,11),(23,'replace windshield', 250.55,13);
+
+insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
+values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
+(2,'2016-05-05',9001,1200,'2016-05-05',2,003,'Nissan','370z',2016),
+(3,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
+(4,'2015-4-19',9001,1200,'2015-4-19',4,21,'Mazda','MX-5',2018),
+(5,'2008-4-19',9001,1200,'2008-4-19',5,57,'Mazda','Rx-7',1998),
+(6,'2014-05-05',9001,1200,'2014-05-05',6,5,'Ford','GT',2013),
+(7,'2015-05-05',9001,1200,'2015-05-05',7,109,'Dodge','Hellcat',2015),
+(8,'2015-10-17',9001,1200,'2015-10-17',8,1021,'Toyota','AE86',1983),
+(9,'2015-6-19',9001,1200,'2015-6-19',9,1291,'Toyota','Supra',1992),
+(10,'2004-4-19',9001,1200,'2004-4-19',10,1287,'DanielSon','CardboardBox',1928);
+
 
