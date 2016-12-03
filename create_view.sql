@@ -16,3 +16,14 @@ inner join address using(CustomerID)
 union
 select CustomerID, 'Individual' as 'CustomerType', street, addressnumber, zipcode from individual inner join customer using(CustomerID)
 inner join address using(CustomerID);
+
+--View for Mechanic Mentor
+create view Mechanic_mentor_v as
+select Mentor.EFirstName as 'MentorFirstName', Mentor.ELastName as 'MentorLastName', Mentee.EFirstName as
+'MenteeFirstName', Mentee.ELastName as 'MenteeLastName' from Employee Mentor inner join employmenttime using(EmployeeID) inner join mechanic 
+on employmenttime.EmployeeInstance = Mechanic.MechanicInstance inner join tempcertificate using(MechanicInstance) inner join mentorship on 
+tempcertificate.CertificateID = mentorship.CertificateID and tempcertificate.MechanicInstance = mentorship.MentorInstance inner join mechanic B on
+mentorship.MenteeInstance = B.MechanicInstance inner join employmenttime E on B.MechanicInstance = E.EmployeeInstance inner join employee Mentee on
+E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
+
+--View for Premier Profits
