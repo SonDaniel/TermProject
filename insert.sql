@@ -183,11 +183,13 @@ insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(16,'Wind Shield',999.99);
 
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
-values(1,1,'oil change');
+values(1,1,'oil change');	
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
-values(2,1,'change oil filter');
+values(2,1,'oil filter change');	
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(3,1,'Air Filter Change');
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(4,3,'Belt Change');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(5,2,'Tire Change');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
@@ -250,7 +252,7 @@ values(6, 'Battery change package');
 insert into ServiceItem(ServiceitemID)
 values(7);
 insert into MaintenancePackage(ServiceitemID,PackageTitle)
-values(7, 'oil change package');
+values(7, 'oil filter change package');
 insert into ServiceItem(ServiceitemID)
 values(8);
 insert into MaintenancePackage(ServiceitemID,PackageTitle)
@@ -277,3 +279,26 @@ insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,Sto
 values (2,4,6,'2007-08-30','2008-02-05');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
 values (1,4,6,'2006-03-01','2006-04-29');
+
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(1, 'Oil change', 24.99, 1);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(2, 'Tire change', 109.99, 5);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(3, 'Air Filter change', 19.99, 3);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(4, 'Suspension Replacement', 849.99, 10);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(5, 'Wheel(Rim) Change', 499.99, 7);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(6, 'Battery Replacement', 74.99, 9);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(7, 'Oil Filter Change', 9.99, 2);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(8, 'Fuse/Spark Change', 9.99, 11);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(9, 'Belt Change', 29.99, 4);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(10, 'Break Change', 149.99, 6);
+insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
+values(11, 'WindShield Replacement', 799.99, 13);
