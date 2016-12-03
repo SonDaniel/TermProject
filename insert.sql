@@ -88,28 +88,28 @@ values('Acura','NSX',2018);
 insert into VehicleCatalog(Make,Model, Year)#11
 values('DanielSon','CardboardBox',1928);
 
-insert into Contracted (CustomerID)
-values (1982);
-insert into Contracted (CustomerID)
-values (003);
-insert into Contracted (CustomerID)
-values (004);
-insert into Contracted (CustomerID)
-values (21);
-insert into Contracted (CustomerID)
-values (57);
-insert into Contracted (CustomerID)
-values (5);
-insert into Contracted (CustomerID)
-values (1291);
-insert into Contracted (CustomerID)
-values (1287);
+insert into Contracted (CustomerID, DateJoined)
+values (1982,'2000');
+insert into Contracted (CustomerID, DateJoined)
+values (003,'2001');
+insert into Contracted (CustomerID, DateJoined)
+values (004,'2005');
+insert into Contracted (CustomerID, DateJoined)
+values (21,'2010');
+insert into Contracted (CustomerID, DateJoined)
+values (57,'2004');
+insert into Contracted (CustomerID, DateJoined)
+values (5,'2004');
+insert into Contracted (CustomerID, DateJoined)
+values (1291,'2011');
+insert into Contracted (CustomerID, DateJoined)
+values (1287,'1999');
 
 
-insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
-values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false);
-insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed)
-values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false);
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
+values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false, '2012');
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
+values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false, '2013');
 
 insert into PremiumCustomer(CustomerID, AnnualFee)
 values (1291, 1000000);
