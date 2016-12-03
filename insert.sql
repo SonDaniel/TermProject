@@ -270,10 +270,10 @@ values(11, 'WindShield change package');
 
 
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
-values (3,7,9,'10-7-2007','12-7-2007');
+values (3,6,10,'2007-10-07','2007-12-7');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
-values (2,1,5,'4-17-2007','8-29-2007');
+values (2,1,5,'2007-04-17','2007-08-29');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
-values (2,4,6,'8-30-2007','2-5-2008');
+values (2,4,6,'2007-08-30','2008-02-05');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
-values (1,4,6,'3-1-2006','4-29-2006');
+values (1,4,6,'2006-03-01','2006-04-29');
