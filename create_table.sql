@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS Employee (
 );
 CREATE TABLE IF NOT EXISTS EmploymentTime(
 	EmployeeInstance int not null auto_increment primary key,
-	DateRetired int not null,
-	DateEmployed int,
+	DateRetired int ,
+	DateEmployed int not null,
 	EmployeeID int,
     Constraint UC_EmployeeInstance UNIQUE (DateEmployed,EmployeeID),
     constraint fk_EmployeeID foreign key (EmployeeID) references Employee (EmployeeID)

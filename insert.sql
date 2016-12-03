@@ -131,4 +131,23 @@ insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
 values(5,0,6900);
 
 
+insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
+values (1,null,1291,'1/1/2016','wire',100000), (2,null,1291,'2/1/2016','wire',100000),(3,null,1287,'1/1/2016','wire',100000), (4,null,1287,'2/1/2016','wire',100000);
+
+insert into Coporation(CustomerID,CorpName)
+values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
+
+insert into Individual(CustomerID,FirstName,LastName)
+values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
+
+insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
+values(null,'2/13/2006',1),(null,'2/13/2006',2),(null,'2/13/2006',3),(null,'2/13/2006',4),(null,'2/13/2006',5),(null,'2/13/2006',6),(null,'2/13/2006',7),(null,'2/13/2006',8),(null,'2/13/2006',9),(null,'2/13/2006',10);
+
+insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
+values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
+
+insert into Mechanic(EmploymentField,ServiceTechnicianInstance)
+values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7)
+
+
 
