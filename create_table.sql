@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS MentorShip(
 
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
-	Phone varchar(11),
+	Phone varchar(12),
 	Email varchar(30)
 );
 
@@ -224,4 +224,13 @@ CREATE TABLE IF NOT EXISTS Holiday(
 	holidayDay int not null,
 	holidayMonth int not null,
 	primary key (holidayDay,holidayMonth)
+);
+
+CREATE TABLE IF NOT EXISTS Email (
+	ServiceItemID int,
+    CustomerID int not null,
+    SuggestedDate Date not null,
+    primary key (CustomerID, SuggestedDate),
+    constraint fk_ServiceItemIDEmail foreign key (ServiceItemID) references Maintenancepackage (MaintenancePackageID),
+    constraint fk_CustomerIDEmail foreign key (CustomerID) references customer (CustomerID)
 );
