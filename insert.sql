@@ -164,7 +164,7 @@ values(6,'Air Filters',29.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(7,'WindShield Wipers',25.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(8,'Spark Plug',10.99);
+values(8,'Wheels',499.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(9,'Fuel Filters',31.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
@@ -172,7 +172,7 @@ values(10,'Air Intake',44.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(11,'Timing Belts',16.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(12,'coilovers', 149.99);
+values(12,'suspension', 149.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
 values(13,'Fuse',2.99);
 insert into PartCatalog(PartCatalogID,PartName,Cost)
@@ -302,3 +302,36 @@ insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
 values(10, 'Break Change', 149.99, 6);
 insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
 values(11, 'WindShield Replacement', 799.99, 13);
+#1 goes to 2
+#2 goes to 3
+#3 goes to 6
+#4 goes to 12
+#5 goes to 8
+#6 goes to 15
+#7 goes to 1
+#8 goes to 13
+#9 goes to 11
+#10 goes to 5
+#11 goes to 16
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (1);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (2);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (3);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (4);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (5);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (6);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (7);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (8);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (9);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (10);
+insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
+values (11);
