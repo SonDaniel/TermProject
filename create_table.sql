@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS Individual (
 
 CREATE TABLE IF NOT EXISTS Contracted (
 	CustomerID int not null primary key,
+	DateJoined Year(4),
 	constraint fk_ContractedCustomer foreign key (CustomerID) references Customer (CustomerID)
 );
 
@@ -109,6 +110,8 @@ CREATE TABLE IF NOT EXISTS ProspectiveCustomer (
 	ReferralCode varchar(20),
 	ReferralAwards varchar(100),
 	referralAwardsUsed boolean,
+	DateJoined Year(4),
+	DeadProspective boolean not null default false,
 	constraint fk_CustomerIDProspective foreign key (CustomerID) references Customer (CustomerID),
 	constraint fk_ConstraintIDContracted foreign key (ContractedID) references Contracted (CustomerID)
 );
@@ -178,7 +181,7 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
 	ServiceitemID int not null primary key,
-	PackageTitle varchar(20),
+	PackageTitle varchar(50),
 	constraint fk_ServicePackage foreign key (ServiceitemID) references ServiceItem (ServiceitemID)
 );
 
