@@ -557,7 +557,7 @@ insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantit
  insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
  values (11,'DanielSon','CardboardBox',1928,16,0);
 
-insert into HOLIDAY(holidayDay, holidayMonth)
+insert into Holiday(holidayDay, holidayMonth)
 insert (31,12),(25,12),(25,11),(24,11),(11,11),(10,10),(5,9),(4,7),(19,6),(30,5),(8,5),(15,4),(15,2),
 (18,1),(1,1);
 
