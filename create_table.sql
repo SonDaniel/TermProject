@@ -198,7 +198,8 @@ CREATE TABLE IF NOT EXISTS IndividualService (
 	Service varchar(30),
 	Cost Decimal(13,2),
 	CertificateNeeded int,
-	constraint fk_ItemIndividualService foreign key (ServiceitemID) references ServiceItem (ServiceitemID)
+	constraint fk_ItemIndividualService foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
+	constraint fk_IndividualService_Certificate foreign key (CertificateNeeded) references Certificate (CertificateID)
 );
 
 CREATE TABLE IF NOT EXISTS PartCatalog (
@@ -221,5 +222,7 @@ CREATE TABLE IF NOT EXISTS PartUsage (
 );
 
 CREATE TABLE IF NOT EXISTS HOLIDAY(
-	HolidayDate date not null primary key
+	holidayDay DAY not null,
+	holidayMonth MONTH, not null,
+	primary key (holidayDay,holidayMonth)
 );
