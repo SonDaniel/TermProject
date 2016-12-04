@@ -138,7 +138,7 @@ insert into Individual(CustomerID,FirstName,LastName)
 values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
 
 insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
-values(null,'2006-02-13',1),(null,'2006-02-13',2),(null,'2006-02-13',3),(null,'2006-02-13',4),(null,'2006-02-13',5),(null,'2006-02-13',6),(null,'2006-02-13',7),(null,'2006-02-13',8),(null,'2006-02-13',9),(null,'2006-02-13',10);
+values(null,'1990-02-13',1),(null,'1990-02-13',2),(null,'1990-02-13',3),(null,'1990-02-13',4),(null,'1990-02-13',5),(null,'1990-02-13',6),(null,'1990-02-13',7),(null,'1990-02-13',8),(null,'1990-02-13',9),(null,'1990-02-13',10);
 
 insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
 values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
