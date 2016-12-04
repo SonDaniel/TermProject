@@ -207,6 +207,8 @@ insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(12,3,'Air Intake');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(13,3,'Windshield Replacement');
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values(14,4,'belt repair');
 
 
 insert into TempCertificate(MechanicInstance,CertificateID) 
