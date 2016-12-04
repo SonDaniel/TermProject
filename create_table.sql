@@ -155,7 +155,6 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 	RepairOrderID int not null primary key AUTO_INCREMENT,
 	DateOrdered datetime,
 	RepairDate datetime,
-	#need total Order,
 	VinNumbers varchar(20),
     ProspectiveID int,
     ServiceTechnicianInstance int,
@@ -180,16 +179,16 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 );
 
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
-	ServiceitemID int not null primary key,
+	MaintenancePackageID int not null primary key,
 	PackageTitle varchar(50),
-	constraint fk_ServicePackage foreign key (ServiceitemID) references ServiceItem (ServiceitemID)
+	constraint fk_ServicePackage foreign key (MaintenancePackageID) references ServiceItem (ServiceitemID)
 );
 
 CREATE TABLE IF NOT EXISTS ServicePackageLine (
 	ServiceitemID int not null,
-	MaintainancePackageID int not null,
-	primary key (ServiceitemID, MaintainancePackageID),
-	constraint fk_PackageLineMaintainancePackage foreign key (MaintainancePackageID) references MaintenancePackage (ServiceitemID),
+	MaintenancePackageID int not null,
+	primary key (ServiceitemID, MaintenancePackageID),
+	constraint fk_PackageLineMaintainancePackage foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
 	constraint fk_PackageLineService foreign key (ServiceitemID) references ServiceItem (ServiceitemID)
 );
 

@@ -21,7 +21,6 @@ values (9,'Steve','Stevens', '1111111118');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (10,'Derik','Derikson', '1111111119');
 
-
 insert into Customer(CustomerID,Phone,email)#1
  values(1982,710-562-2011,'Bobsherman@hotmail.com');
 insert into Customer(CustomerID,Phone,email)#2
@@ -104,7 +103,6 @@ values (1291,'2011');
 insert into Contracted (CustomerID, DateJoined)
 values (1287,'1999');
 
-
 insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
 values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false, '2012');
 insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
@@ -140,7 +138,7 @@ insert into Individual(CustomerID,FirstName,LastName)
 values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
 
 insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
-values(null,'2006-02-13',1),(null,'2006-02-13',2),(null,'2006-02-13',3),(null,'2006-02-13',4),(null,'2006-02-13',5),(null,'2006-02-13',6),(null,'2006-02-13',7),(null,'2006-02-13',8),(null,'2006-02-13',9),(null,'2006-02-13',10);
+values(null,'1990-02-13',1),(null,'1990-02-13',2),(null,'1990-02-13',3),(null,'1990-02-13',4),(null,'1990-02-13',5),(null,'1990-02-13',6),(null,'1990-02-13',7),(null,'1990-02-13',8),(null,'1990-02-13',9),(null,'1990-02-13',10);
 
 insert into ServiceTechnician(EmploymentField,ServiceTechnicianInstance)
 values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10);
@@ -210,65 +208,64 @@ values(13,3,'Windshield Replacement');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(14,4,'belt repair');
 
-
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(1,1),(1,2),(1,5),(1,8),(1,12);
+values(1,1),(1,2),(1,5),(1,8),(1,12),(1,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(2,3),(2,9),(2,10),(2,11);
+values(2,3),(2,9),(2,10),(2,11),(2,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(3,1),(3,2),(3,5),(3,7);
+values(3,1),(3,2),(3,5),(3,7),(3,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(4,3),(4,5),(4,6),(4,12);
+values(4,3),(4,5),(4,6),(4,12),(4,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(5,1),(5,2);
+values(5,1),(5,2),(5,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(6,10),(6,11),(6,12);
+values(6,10),(6,11),(6,12),(6,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(7,1),(7,2),(7,3),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13);
+values(7,1),(7,2),(7,3),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13),(7,14);
 
 insert into ServiceItem(ServiceitemID)
 values(1);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(1, 'Oil change package');
 insert into ServiceItem(ServiceitemID)
 values(2);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(2, 'Tire change package');
 insert into ServiceItem(ServiceitemID)
 values(3);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(3, 'Air Filter Change Package');
 insert into ServiceItem(ServiceitemID)
 values(4);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(4, 'Suspension Change Package');
 insert into ServiceItem(ServiceitemID)
 values(5);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(5, 'Wheel Change Package');
 insert into ServiceItem(ServiceitemID)
 values(6);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(6, 'Battery change package');
 insert into ServiceItem(ServiceitemID)
 values(7);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(7, 'oil filter change package');
 insert into ServiceItem(ServiceitemID)
 values(8);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(8, 'Fuse change package');
 insert into ServiceItem(ServiceitemID)
 values(9);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(9, 'Belt change package');
 insert into ServiceItem(ServiceitemID)
 values(10);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(10, 'Break change package');
 insert into ServiceItem(ServiceitemID)
 values(11);
-insert into MaintenancePackage(ServiceitemID,PackageTitle)
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
 values(11, 'WindShield change package');
 
 
@@ -558,12 +555,11 @@ insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantit
  values (11,'DanielSon','CardboardBox',1928,16,0);
 
 insert into Holiday(holidayDay, holidayMonth)
-insert (31,12),(25,12),(25,11),(24,11),(11,11),(10,10),(5,9),(4,7),(19,6),(30,5),(8,5),(15,4),(15,2),
+values (31,12),(25,12),(25,11),(24,11),(11,11),(10,10),(5,9),(4,7),(19,6),(30,5),(8,5),(15,4),(15,2),
 (18,1),(1,1);
 
-
 insert into ServiceItem(ServiceitemID)
-values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23);
+values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24);
 
 insert into MaintenancePackage(ServiceitemID,PackageTitle)
 values(1, 'Oil change package'),(2, 'Tire change package'),(3, 'Air Filter Change Package'),(4, 'Suspension Change Package'),
@@ -576,11 +572,12 @@ values (12,'change oil', 50.55,1),(13,'change oil filter', 100.55,2),(14,'change
 ,(18,'change rim', 250.55,7),(19,'repair windshield wipers', 80.55,8), (20,'replace battery', 200.55,9)
 ,(21,'change suspension', 450.55,10),(22,'change spark plug', 50.55,11),(23,'replace windshield', 250.55,13),(24,'replace windshield', 250.55,14);
 
+
 insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
 values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 (2,'2016-05-05',9001,1200,'2016-05-05',2,003,'Nissan','370z',2016),
 (3,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
-(4,'2015-4-19',9001,1200,'2015-4-19',4,21,'Mazda','MX-5',2018),
+(4,'2015-4-19',9001,1200,'2015-4-19',4,21,'Mazda','MX-5',2016),
 (5,'2008-4-19',9001,1200,'2008-4-19',5,57,'Mazda','Rx-7',1998),
 (6,'2014-05-05',9001,1200,'2014-05-05',6,5,'Ford','GT',2013),
 (7,'2015-05-05',9001,1200,'2015-05-05',7,109,'Dodge','Hellcat',2015),
@@ -591,5 +588,82 @@ values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 
 insert into ServicePackageLine(ServiceItemID,MaintenancePackageID)
 values (12,1),(13,1),(14,2),(12,2),(15,3),(12,3),(14,4),(21,4),(14,5),(17,5),(20,6),(12,6),(1,7),(15,7)
-,(12,8),(22,8),(12,9),(24,9),(12,10),(17,10),(23,11),(19,11)
+,(12,8),(22,8),(12,9),(23,9),(12,10),(17,10),(23,11),(19,11);
 
+
+
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ProspectiveID,ServiceTechnicianInstance )
+values(1,  '2001-3-1','2001-3-8',2,109,8);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ProspectiveID,ServiceTechnicianInstance )
+values(2,  '2005-3-14','2005-3-27',3,1021,10);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(3,  '2001-4-1',  '2001-3-8', 1,9);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(4,  '2001-4-1',  '2001-3-8', 1,8);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(5,  '2010-4-1',  '2010-3-8', 4,10);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(6,  '2011-4-1',  '2011-3-8', 4,10);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(7,  '2012-4-1',  '2012-3-8', 4,8);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(8,  '2004-5-1',  '2004-4-8', 5,9);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(9,  '2004-5-1',  '2004-5-8', 6,8);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(10,  '2011-6-1',  '2011-6-8', 7,10);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(11,  '2012-6-1',  '2012-6-8', 7,9);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(12,  '2013-6-1',  '2013-6-8', 7,8);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(13,  '1999-6-1',  '1999-6-8', 8,9);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(14,  '2013-7-1',  '2013-7-8', 9,9);
+
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(15, '2013-7-1',  '2013-7-8', 10,8);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(16, '2014-7-1',  '2014-7-8', 10,10);
+
+
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(12,1 ,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(1,2 ,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(14,3 ,3);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(1,4 ,3);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(15,5 ,2);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(1,6 ,5);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(13,7 ,5);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(16,8 ,6);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(1,9 ,7);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(24,10,4);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(22,11,6);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(21,12,7);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(1,13,7);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(19,14,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(17,15,4);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(13,16,1);
