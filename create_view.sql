@@ -27,3 +27,12 @@ mentorship.MenteeInstance = B.MechanicInstance inner join employmenttime E on B.
 E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
 
 --View for Premier Profits
+
+
+--View for Prospective Customer Resurrection
+create view Prospective_resurrection_v as 
+select CustomerID from email inner join customer using(CustomerID) 
+inner join prospectivecustomer using(CustomerID) group by CustomerID having count(CustomerID) > 3
+union
+select A.CustomerID from email A inner join customer using(CustomerID) inner join prospectivecustomer using(CustomerID)
+where suggestedDate = (Select max(SuggestedDate) from email B where B.CustomerID = A.CustomerID) and (year(curdate()) - year(A.suggestedDate)) >= 1;
