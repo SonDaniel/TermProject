@@ -857,3 +857,20 @@ mentorship.MenteeInstance = B.MechanicInstance inner join employmenttime E on B.
 E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
 
 --View for Premier Profits
+
+
+
+
+#TRIGGERS
+
+delimiter //
+create TRIGGER certificateCheck BEFORE INSERT ON RepairLine
+for each row
+begin
+
+	D
+
+
+end;
+//
+delimiter ;
