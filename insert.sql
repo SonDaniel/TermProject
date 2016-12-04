@@ -1,5 +1,3 @@
-#The insert statements used to populate the tables
-
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (1,'Jimmy','Chao', '1111111111');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
@@ -11,9 +9,9 @@ values (4,'Daniel','Son', '1111111114');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (5,'John','smith', '1111111115');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
-values (6,'Rick','Rickson', '1111111116');
+values (6,'Rick','Rickson', '1011111116');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
-values (7,'Harambe','Bringer of Peace', '7777777777');
+values (7,'Harambe','Bringer of Peace', '1777777777');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (8,'Jeff','Jefferson', '1111111117');
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
@@ -40,7 +38,7 @@ insert into Customer(CustomerID,Phone,email)#8
 insert into Customer(CustomerID,Phone,email)#9
  values(1291,021-427-1231,'Matt@Matt.com');
  insert into Customer(CustomerID,Phone,email)#10
- values(1287,2153-237-2411,'Damn@Daniel.com');
+ values(1287,153-237-2411,'Damn@Daniel.com');
  
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1982,'home','Wew St.',124,11111);
@@ -207,6 +205,8 @@ insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(13,3,'Windshield Replacement');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(14,4,'belt repair');
+insert into Certificate(CertificateID,CertificateLevel,ServiceType)
+values (15,3,'wheel change');
 
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(1,1),(1,2),(1,5),(1,8),(1,12),(1,14);
@@ -223,50 +223,6 @@ values(6,10),(6,11),(6,12),(6,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(7,1),(7,2),(7,3),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13),(7,14);
 
-insert into ServiceItem(ServiceitemID)
-values(1);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(1, 'Oil change package');
-insert into ServiceItem(ServiceitemID)
-values(2);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(2, 'Tire change package');
-insert into ServiceItem(ServiceitemID)
-values(3);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(3, 'Air Filter Change Package');
-insert into ServiceItem(ServiceitemID)
-values(4);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(4, 'Suspension Change Package');
-insert into ServiceItem(ServiceitemID)
-values(5);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(5, 'Wheel Change Package');
-insert into ServiceItem(ServiceitemID)
-values(6);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(6, 'Battery change package');
-insert into ServiceItem(ServiceitemID)
-values(7);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(7, 'oil filter change package');
-insert into ServiceItem(ServiceitemID)
-values(8);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(8, 'Fuse change package');
-insert into ServiceItem(ServiceitemID)
-values(9);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(9, 'Belt change package');
-insert into ServiceItem(ServiceitemID)
-values(10);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(10, 'Break change package');
-insert into ServiceItem(ServiceitemID)
-values(11);
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(11, 'WindShield change package');
 
 
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
@@ -278,288 +234,283 @@ values (2,4,6,'2007-08-30','2008-02-05');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
 values (1,4,6,'2006-03-01','2006-04-29');
 
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(1, 'Oil change', 24.99, 1);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(2, 'Tire change', 109.99, 5);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(3, 'Air Filter change', 19.99, 3);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(4, 'Suspension Replacement', 849.99, 10);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(5, 'Wheel(Rim) Change', 499.99, 7);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(6, 'Battery Replacement', 74.99, 9);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(7, 'Oil Filter Change', 9.99, 2);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(8, 'Fuse/Spark Change', 9.99, 11);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(9, 'Belt Change', 29.99, 4);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(10, 'Break Change', 149.99, 6);
-insert into IndividualService(ServiceitemID,Service,Cost,CertificateNeeded)
-values(11, 'WindShield Replacement', 799.99, 13);
+insert into ServiceItem(ServiceitemID)
+values (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25);
+
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
+values(1, 'Oil change package'),(2, 'Tire change package'),(3, 'Air Filter Change Package'),(4, 'Suspension Change Package'),
+(5, 'Wheel Change Package'),(6, 'Battery change package'),(7, 'deluxe oil change package'),(8, 'Fuse change package'),
+(9, 'Belt change package'),(10, 'Break change package'),(11, 'WindShield change package');
+
+insert into IndividualService(ServiceItemID,Service,Cost,CertificateNeeded)
+values (12,'change oil', 50.55,1),(13,'change oil filter', 100.55,2),(14,'change tire', 50.55,5)
+,(15,'change air filter', 95.55,3),(16,'fix air intake', 150.55,12),(17,'break change', 150.55,6)
+,(18,'change rim', 250.55,7),(19,'repair windshield wipers', 80.55,8), (20,'replace battery', 200.55,9)
+,(21,'change suspension', 450.55,10),(22,'change spark plug', 50.55,11),(23,'replace windshield', 250.55,13),(24,'replace belt', 250.55,14)
+,(25,'change wheel', 50.55,15);
+
+
+insert into ServicePackageLine(ServiceItemID,MaintenancePackageID)
+values (12,1),(13,1),(14,2),(12,2),(15,3),(12,3),(14,4),(21,4),(14,5),(17,5),(20,6),(12,6),(1,7),(15,7)
+,(12,8),(22,8),(12,9),(24,9),(12,10),(17,10),(23,11),(19,11);
+
 
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#1 goes to 2
-values (1,'Challenger','Mk2',1998,2,1);
+values (12,'Challenger','Mk2',1998,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Nissan','370z',2016,2,1);
+values (12,'Nissan','370z',2016,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Subaru','BRZ',2016,2,1);
+values (12,'Subaru','BRZ',2016,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Mazda','MX-5',2016,2,1);
+values (12,'Mazda','MX-5',2016,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Mazda','Rx-7',1998,2,1);
+values (12,'Mazda','Rx-7',1998,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Ford','GT',2013,2,1);
+values (12,'Ford','GT',2013,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Dodge','Hellcat',2015,2,1);
+values (12,'Dodge','Hellcat',2015,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Toyota','AE86',1983,2,1);
+values (12,'Toyota','AE86',1983,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Toyota','Supra',1992,2,1);
+values (12,'Toyota','Supra',1992,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'Acura','NSX',2016,2,1);
+values (12,'Acura','NSX',2016,2,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (1,'DanielSon','CardboardBox',1928,2,0);
+values (12,'DanielSon','CardboardBox',1928,2,0);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#2 goes to 3
-values (2,'Challenger','Mk2',1998,3,10);
+values (14,'Challenger','Mk2',1998,3,10);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Nissan','370z',2016,3,4);
+values (14,'Nissan','370z',2016,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Subaru','BRZ',2016,3,4);
+values (14,'Subaru','BRZ',2016,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Mazda','MX-5',2016,3,4);
+values (14,'Mazda','MX-5',2016,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Mazda','Rx-7',1998,3,4);
+values (14,'Mazda','Rx-7',1998,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Ford','GT',2013,3,4);
+values (14,'Ford','GT',2013,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Dodge','Hellcat',2015,3,4);
+values (14,'Dodge','Hellcat',2015,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Toyota','AE86',1983,3,4);
+values (14,'Toyota','AE86',1983,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Toyota','Supra',1992,3,4);
+values (14,'Toyota','Supra',1992,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'Acura','NSX',2016,3,4);
+values (14,'Acura','NSX',2016,3,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (2,'DanielSon','CardboardBox',1928,3,3);
+values (14,'DanielSon','CardboardBox',1928,3,3);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#3 goes to 6
-values (3,'Challenger','Mk2',1998,6,2);
+values (15,'Challenger','Mk2',1998,6,2);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Nissan','370z',2016,6,1);
+values (15,'Nissan','370z',2016,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Subaru','BRZ',2016,6,1);
+values (15,'Subaru','BRZ',2016,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Mazda','MX-5',2016,6,1);
+values (15,'Mazda','MX-5',2016,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Mazda','Rx-7',1998,6,1);
+values (15,'Mazda','Rx-7',1998,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Ford','GT',2013,6,1);
+values (15,'Ford','GT',2013,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Dodge','Hellcat',2015,6,1);
+values (15,'Dodge','Hellcat',2015,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Toyota','AE86',1983,6,1);
+values (15,'Toyota','AE86',1983,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Toyota','Supra',1992,6,1);
+values (15,'Toyota','Supra',1992,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'Acura','NSX',2016,6,1);
+values (15,'Acura','NSX',2016,6,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (3,'DanielSon','CardboardBox',1928,6,5);
+values (15,'DanielSon','CardboardBox',1928,6,5);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#4 goes to 12
-values (4,'Challenger','Mk2',1998,12,6);
+values (21,'Challenger','Mk2',1998,12,6);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Nissan','370z',2016,12,4);
+values (21,'Nissan','370z',2016,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Subaru','BRZ',2016,12,4);
+values (21,'Subaru','BRZ',2016,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Mazda','MX-5',2016,12,4);
+values (21,'Mazda','MX-5',2016,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Mazda','Rx-7',1998,12,4);
+values (21,'Mazda','Rx-7',1998,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Ford','GT',2013,12,4);
+values (21,'Ford','GT',2013,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Dodge','Hellcat',2015,12,4);
+values (21,'Dodge','Hellcat',2015,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Toyota','AE86',1983,12,4);
+values (21,'Toyota','AE86',1983,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Toyota','Supra',1992,12,4);
+values (21,'Toyota','Supra',1992,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'Acura','NSX',2016,12,4);
+values (21,'Acura','NSX',2016,12,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (4,'DanielSon','CardboardBox',1928,12,10);
+values (21,'DanielSon','CardboardBox',1928,12,10);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#5 goes to 8
-values (5,'Challenger','Mk2',1998,8,10);
+values (25,'Challenger','Mk2',1998,8,10);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Nissan','370z',2016,8,4);
+values (25,'Nissan','370z',2016,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Subaru','BRZ',2016,8,4);
+values (25,'Subaru','BRZ',2016,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Mazda','MX-5',2016,8,4);
+values (25,'Mazda','MX-5',2016,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Mazda','Rx-7',1998,8,4);
+values (25,'Mazda','Rx-7',1998,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Ford','GT',2013,8,4);
+values (25,'Ford','GT',2013,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Dodge','Hellcat',2015,8,4);
+values (25,'Dodge','Hellcat',2015,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Toyota','AE86',1983,8,4);
+values (25,'Toyota','AE86',1983,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Toyota','Supra',1992,8,4);
+values (25,'Toyota','Supra',1992,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'Acura','NSX',2016,8,4);
+values (25,'Acura','NSX',2016,8,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (5,'DanielSon','CardboardBox',1928,8,10);
+values (25,'DanielSon','CardboardBox',1928,8,10);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#6 goes to 15
-values (6,'Challenger','Mk2',1998,15,4);
+values (20,'Challenger','Mk2',1998,15,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Nissan','370z',2016,15,1);
+values (20,'Nissan','370z',2016,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Subaru','BRZ',2016,15,1);
+values (20,'Subaru','BRZ',2016,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Mazda','MX-5',2016,15,1);
+values (20,'Mazda','MX-5',2016,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Mazda','Rx-7',1998,15,1);
+values (20,'Mazda','Rx-7',1998,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Ford','GT',2013,15,1);
+values (20,'Ford','GT',2013,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Dodge','Hellcat',2015,15,1);
+values (20,'Dodge','Hellcat',2015,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Toyota','AE86',1983,15,1);
+values (20,'Toyota','AE86',1983,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Toyota','Supra',1992,15,1);
+values (20,'Toyota','Supra',1992,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'Acura','NSX',2016,15,1);
+values (20,'Acura','NSX',2016,15,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (6,'DanielSon','CardboardBox',1928,15,2);
+values (20,'DanielSon','CardboardBox',1928,15,2);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#7 goes to 1
-values (7,'Challenger','Mk2',1998,1,1);
+values (13,'Challenger','Mk2',1998,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Nissan','370z',2016,1,1);
+values (13,'Nissan','370z',2016,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Subaru','BRZ',2016,1,1);
+values (13,'Subaru','BRZ',2016,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Mazda','MX-5',2016,1,1);
+values (13,'Mazda','MX-5',2016,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Mazda','Rx-7',1998,1,1);
+values (13,'Mazda','Rx-7',1998,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Ford','GT',2013,1,1);
+values (13,'Ford','GT',2013,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Dodge','Hellcat',2015,1,1);
+values (13,'Dodge','Hellcat',2015,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Toyota','AE86',1983,1,1);
+values (13,'Toyota','AE86',1983,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Toyota','Supra',1992,1,1);
+values (13,'Toyota','Supra',1992,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'Acura','NSX',2016,1,1);
+values (13,'Acura','NSX',2016,1,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (7,'DanielSon','CardboardBox',1928,1,0);
+values (13,'DanielSon','CardboardBox',1928,1,0);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#8 goes to 13
-values (8,'Challenger','Mk2',1998,13,16);
+values (22,'Challenger','Mk2',1998,13,16);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Nissan','370z',2016,13,8);
+values (22,'Nissan','370z',2016,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Subaru','BRZ',2016,13,8);
+values (22,'Subaru','BRZ',2016,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Mazda','MX-5',2016,13,8);
+values (22,'Mazda','MX-5',2016,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Mazda','Rx-7',1998,13,8);
+values (22,'Mazda','Rx-7',1998,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Ford','GT',2013,13,8);
+values (22,'Ford','GT',2013,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Dodge','Hellcat',2015,13,8);
+values (22,'Dodge','Hellcat',2015,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Toyota','AE86',1983,13,8);
+values (22,'Toyota','AE86',1983,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Toyota','Supra',1992,13,8);
+values (22,'Toyota','Supra',1992,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'Acura','NSX',2016,13,8);
+values (22,'Acura','NSX',2016,13,8);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (8,'DanielSon','CardboardBox',1928,13,0);
+values (22,'DanielSon','CardboardBox',1928,13,0);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#9 goes to 11
-values (9,'Challenger','Mk2',1998,11,1);
+values (24,'Challenger','Mk2',1998,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Nissan','370z',2016,11,1);
+values (24,'Nissan','370z',2016,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Subaru','BRZ',2016,11,1);
+values (24,'Subaru','BRZ',2016,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Mazda','MX-5',2016,11,1);
+values (24,'Mazda','MX-5',2016,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Mazda','Rx-7',1998,11,1);
+values (24,'Mazda','Rx-7',1998,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Ford','GT',2013,11,1);
+values (24,'Ford','GT',2013,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Dodge','Hellcat',2015,11,1);
+values (24,'Dodge','Hellcat',2015,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Toyota','AE86',1983,11,1);
+values (24,'Toyota','AE86',1983,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Toyota','Supra',1992,11,1);
+values (24,'Toyota','Supra',1992,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'Acura','NSX',2016,11,1);
+values (24,'Acura','NSX',2016,11,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (9,'DanielSon','CardboardBox',1928,11,2);
+values (24,'DanielSon','CardboardBox',1928,11,2);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#10 goes to 5
-values (10,'Challenger','Mk2',1998,5,10);
+values (17,'Challenger','Mk2',1998,5,10);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Nissan','370z',2016,5,4);
+values (17,'Nissan','370z',2016,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Subaru','BRZ',2016,5,4);
+values (17,'Subaru','BRZ',2016,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Mazda','MX-5',2016,5,4);
+values (17,'Mazda','MX-5',2016,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Mazda','Rx-7',1998,5,4);
+values (17,'Mazda','Rx-7',1998,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Ford','GT',2013,5,4);
+values (17,'Ford','GT',2013,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Dodge','Hellcat',2015,5,4);
+values (17,'Dodge','Hellcat',2015,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Toyota','AE86',1983,5,4);
+values (17,'Toyota','AE86',1983,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Toyota','Supra',1992,5,4);
+values (17,'Toyota','Supra',1992,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'Acura','NSX',2016,5,4);
+values (17,'Acura','NSX',2016,5,4);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (10,'DanielSon','CardboardBox',1928,5,2);
+values (17,'DanielSon','CardboardBox',1928,5,2);
 #______________________________________#
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)#11 goes to 16
-values (11,'Challenger','Mk2',1998,16,0);
+values (23,'Challenger','Mk2',1998,16,0);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Nissan','370z',2016,16,1);
+values (23,'Nissan','370z',2016,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Subaru','BRZ',2016,16,1);
+values (23,'Subaru','BRZ',2016,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Mazda','MX-5',2016,16,1);
+values (23,'Mazda','MX-5',2016,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Mazda','Rx-7',1998,16,1);
+values (23,'Mazda','Rx-7',1998,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Ford','GT',2013,16,1);
+values (23,'Ford','GT',2013,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Dodge','Hellcat',2015,16,1);
+values (23,'Dodge','Hellcat',2015,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Toyota','AE86',1983,16,1);
+values (23,'Toyota','AE86',1983,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
-values (11,'Toyota','Supra',1992,16,1);
+values (23,'Toyota','Supra',1992,16,1);
 insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
- values (11,'Acura','NSX',2016,16,1);
+ values (23,'Acura','NSX',2016,16,1);
  insert into PartUsage(IndividualServiceID,Make,Model,Year, PartCatalogID,Quantity)
- values (11,'DanielSon','CardboardBox',1928,16,0);
+ values (23,'DanielSon','CardboardBox',1928,16,0);
 
 insert into Holiday(holidayDay, holidayMonth)
 values (31,12),(25,12),(25,11),(24,11),(11,11),(10,10),(5,9),(4,7),(19,6),(30,5),(8,5),(15,4),(15,2),
 (18,1),(1,1);
-
-insert into ServiceItem(ServiceitemID)
-values (12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24);
 
 insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
 values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
@@ -572,13 +523,6 @@ values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 (8,'2015-10-17',9001,1200,'2015-10-17',8,1021,'Toyota','AE86',1983),
 (9,'2015-6-19',9001,1200,'2015-6-19',9,1291,'Toyota','Supra',1992),
 (10,'2004-4-19',9001,1200,'2004-4-19',10,1287,'DanielSon','CardboardBox',1928);
-
-
-insert into ServicePackageLine(ServiceItemID,MaintenancePackageID)
-values (12,1),(13,1),(14,2),(12,2),(15,3),(12,3),(14,4),(21,4),(14,5),(17,5),(20,6),(12,6),(1,7),(15,7)
-,(12,8),(22,8),(12,9),(23,9),(12,10),(17,10),(23,11),(19,11);
-
-
 
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ProspectiveID,ServiceTechnicianInstance )
