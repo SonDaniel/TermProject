@@ -227,10 +227,10 @@ CREATE TABLE IF NOT EXISTS Holiday(
 );
 
 CREATE TABLE IF NOT EXISTS Email (
-	ServiceItemID int,
+	MaintenancePackageID int,
     CustomerID int not null,
     SuggestedDate Date not null,
     primary key (CustomerID, SuggestedDate),
-    constraint fk_ServiceItemIDEmail foreign key (ServiceItemID) references Maintenancepackage (MaintenancePackageID),
+    constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references Maintenancepackage (MaintenancePackageID),
     constraint fk_CustomerIDEmail foreign key (CustomerID) references customer (CustomerID)
 );
