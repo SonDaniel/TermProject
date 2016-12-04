@@ -208,7 +208,7 @@ values(11,2,'Spark Plug Change');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(12,3,'Air Intake');
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
-values(13,3,'Windshield Replacement');
+values(13,3,'Windshield Replacement'),(14,4,'belt repair');
 
 
 insert into TempCertificate(MechanicInstance,CertificateID) 
@@ -245,14 +245,14 @@ insert into ServiceItem(ServiceitemID)
 values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23);
 insert into MaintenancePackage(ServiceitemID,PackageTitle)
 values(1, 'Oil change package'),(2, 'Tire change package'),(3, 'Air Filter Change Package'),(4, 'Suspension Change Package'),
-(5, 'Wheel Change Package'),(6, 'Battery change package'),(7, 'oil change package'),(8, 'Fuse change package'),
+(5, 'Wheel Change Package'),(6, 'Battery change package'),(7, 'deluxe oil change package'),(8, 'Fuse change package'),
 (9, 'Belt change package'),(10, 'Break change package'),(11, 'WindShield change package');
 
 insert into IndividualService(ServiceItemID,Service,Cost,CertificateNeeded)
-values (12,'change oil', 50.55,1),(12,'change oil filter', 100.55,2),(14,'change tire', 50.55,5)
+values (12,'change oil', 50.55,1),(13,'change oil filter', 100.55,2),(14,'change tire', 50.55,5)
 ,(15,'change air filter', 95.55,3),(16,'fix air intake', 150.55,12),(17,'break change', 150.55,6)
 ,(18,'change rim', 250.55,7),(19,'repair windshield wipers', 80.55,8), (20,'replace battery', 200.55,9)
-,(21,'change suspension', 450.55,10),(22,'change spark plug', 50.55,11),(23,'replace windshield', 250.55,13);
+,(21,'change suspension', 450.55,10),(22,'change spark plug', 50.55,11),(23,'replace windshield', 250.55,13),(24,'replace windshield', 250.55,14);
 
 insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
 values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
@@ -265,5 +265,12 @@ values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 (8,'2015-10-17',9001,1200,'2015-10-17',8,1021,'Toyota','AE86',1983),
 (9,'2015-6-19',9001,1200,'2015-6-19',9,1291,'Toyota','Supra',1992),
 (10,'2004-4-19',9001,1200,'2004-4-19',10,1287,'DanielSon','CardboardBox',1928);
+
+
+insert into ServicePackageLine(ServiceItemID,MaintenancePackageID)
+values (12,1),(13,1),(14,2),(12,2),(15,3),(12,3),(14,4),(21,4),(14,5),(17,5),(20,6),(12,6),(1,7),(15,7)
+,(12,8),(22,8),(12,9),(24,9),(12,10),(17,10),(23,11),(19,11)
+
+
 
 
