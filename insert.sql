@@ -103,8 +103,8 @@ values (1287,'1999');
 
 insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
 values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false, '2012');
-insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
-values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false, '2013');
+insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined, DeadProspective)
+values (1021,004,'free oil change',true,'1236','60 dollars off next purchase',false, '2013', true);
 
 insert into PremiumCustomer(CustomerID, AnnualFee)
 values (1291, 1000000);
@@ -599,3 +599,7 @@ insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
 value(17,15,4);
 insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
 value(13,16,1);
+
+insert into email (MaintenancePackageID, CustomerID, SuggestedDate)
+values (1, 109, '2016-01-01'),(1, 109, '2016-02-01'),(1, 109, '2016-03-01'),(3, 1021, '2016-03-01'),(2, 1021, '2016-01-01'),
+(3, 1021, '2016-04-01'),(3, 1021, '2016-05-01'),(3, 1021, '2016-05-02');
