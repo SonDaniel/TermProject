@@ -22,6 +22,13 @@ inner join Customer using(CustomerID);
 -- that they have spent in that period.
 
 -- 4. Find all of the mechanics who have three or more skills.
+SELECT EFirstName, ELastName, count(certificateID) AS 'Number of Skills'
+FROM Employee	
+inner join employmentTime using(EmployeeID)
+inner join Mechanic on MechanicInstance=EmployeeInstance
+inner join tempcertificate using(MechanicInstance)
+group by EFirstName, ELastName;
+
 
 -- 5. Find all of the mechanics who have three or more skills in common.
 

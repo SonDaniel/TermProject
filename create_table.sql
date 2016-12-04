@@ -231,6 +231,6 @@ CREATE TABLE IF NOT EXISTS Email (
     CustomerID int not null,
     SuggestedDate Date not null,
     primary key (CustomerID, SuggestedDate),
-    constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references Maintenancepackage (MaintenancePackageID),
-    constraint fk_CustomerIDEmail foreign key (CustomerID) references customer (CustomerID)
+    constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
+    constraint fk_CustomerIDEmail foreign key (CustomerID) references Customer (CustomerID)
 );
