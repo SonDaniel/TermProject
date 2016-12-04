@@ -1,4 +1,20 @@
 -- 1. List the customers. For each customer, indicate which category he or she fall into, and his or her contact information.
+SELECT FirstName, LastName, 'Individual' AS 'Customer Type',Phone, Email
+From Individual 
+inner join Customer using(CustomerID)
+UNION
+SELECT CorpName AS 'FirstName', 'Corp' AS 'LastName', 'Corporation' AS 'Customer Type',Phone,Email
+FROM Corporation
+inner join Customer using(CustomerID)
+order by LastName asc, FirstName asc;
+#VERSION 2
+SELECT FirstName, LastName, '' AS 'Corporation Name','Individual' AS 'Customer Type',Phone, Email
+From Individual 
+inner join Customer using(CustomerID)
+UNION
+SELECT '' AS 'FirstName', '' AS 'LastName',CorpName AS 'Corporation Name', 'Corporation' AS 'Customer Type',Phone,Email
+FROM Corporation
+inner join Customer using(CustomerID);
 
 -- 2. For each service visit, list the total cost to the customer for that visit.
 
