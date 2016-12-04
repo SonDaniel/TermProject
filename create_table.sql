@@ -221,8 +221,8 @@ CREATE TABLE IF NOT EXISTS PartUsage (
 	constraint fk_VehicleCatalogPartUsage foreign key (Make, Model, Year) references VehicleCatalog (Make, Model, Year)
 );
 
-CREATE TABLE IF NOT EXISTS HOLIDAY(
-	holidayDay DAY not null,
-	holidayMonth MONTH, not null,
+CREATE TABLE IF NOT EXISTS Holiday(
+	holidayDay int not null,
+	holidayMonth int not null,
 	primary key (holidayDay,holidayMonth)
 );
