@@ -20,25 +20,25 @@ insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (10,'Derik','Derikson', '1111111119');
 
 insert into Customer(CustomerID,Phone,email)#1
- values(1982,710-562-2011,'Bobsherman@hotmail.com');
+ values(1982,'710-562-2011','Bobsherman@hotmail.com');
 insert into Customer(CustomerID,Phone,email)#2
- Values(003,818-667-9479,'ealonzo003@gmail.com');
+ Values(003,'818-667-9479','ealonzo003@gmail.com');
 insert into Customer(CustomerID,Phone,email)#3
- values(004,911-911-9111,'about4turtles@gmail.com');
+ values(004,'911-911-9111','about4turtles@gmail.com');
 insert into Customer(CustomerID,Phone,email)#4
- values(21, 010-021-1997,'fake@Fakemail.com');
+ values(21, '010-021-1997','fake@Fakemail.com');
 insert into Customer(CustomerID,Phone,email)#5
- values(57, 310-210-2879,'rocker@hooner.com');
+ values(57, '310-210-2879','rocker@hooner.com');
 insert into Customer(CustomerID,Phone,email)#6
- values(5, 661-287-2882,'about5@gmail.com');
+ values(5, '661-287-2882','about5@gmail.com');
 insert into Customer(CustomerID,Phone,email)#7
- values(109, 182-283-2918,'Customer@customermail.com');
+ values(109, '182-283-2918','Customer@customermail.com');
 insert into Customer(CustomerID,Phone,email)#8
- values(1021,003-007-1021,'Fighter@jet.com');
+ values(1021,'003-007-1021','Fighter@jet.com');
 insert into Customer(CustomerID,Phone,email)#9
- values(1291,021-427-1231,'Matt@Matt.com');
+ values(1291,'021-427-1231','Matt@Matt.com');
  insert into Customer(CustomerID,Phone,email)#10
- values(1287,153-237-2411,'Damn@Daniel.com');
+ values(1287,'153-237-2411','Damn@Daniel.com');
  
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1982,'home','Wew St.',124,11111);
