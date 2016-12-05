@@ -663,24 +663,24 @@ values (1, 109, '2015-01-01'),(1, 109, '2015-05-01'),(3, 1021, '2014-03-01'),(2,
 (3, 1021, '2015-04-01'),(3, 1021, '2016-05-01'),(3, 1021, '2016-05-02');
 
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Challenger','Mk2',1998,10000),(4,'Challenger','Mk2',1998,10000),(8,'Challenger','Mk2',1998,10000);
+values (1,'Challenger','Mk2',1998,10000),(2,'Challenger','Mk2',1998,10000),(3,'Challenger','Mk2',1998,10000),(4,'Challenger','Mk2',1998,10000),(5,'Challenger','Mk2',1998,10000),(6,'Challenger','Mk2',1998,10000),(7,'Challenger','Mk2',1998,10000),(8,'Challenger','Mk2',1998,10000),(9,'Challenger','Mk2',1998,10000),(10,'Challenger','Mk2',1998,10000),(11,'Challenger','Mk2',1998,10000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(11,'Nissan','370z',2016,10000);
+values (1,'Nissan','370z',2016,10000),(2,'Nissan','370z',2016,10000),(3,'Nissan','370z',2016,10000),(4,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(11,'Nissan','370z',2016,10000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Subaru','BRZ',2016,15000),(2,'Subaru','BRZ',2016,15000),(10,'Subaru','BRZ',2016,15000);
+values (1,'Subaru','BRZ',2016,15000),(2,'Subaru','BRZ',2016,15000),(3,'Subaru','BRZ',2016,15000),(4,'Subaru','BRZ',2016,15000),(5,'Subaru','BRZ',2016,15000),(6,'Subaru','BRZ',2016,15000),(7,'Subaru','BRZ',2016,15000),(8,'Subaru','BRZ',2016,15000),(9,'Subaru','BRZ',2016,15000),(10,'Subaru','BRZ',2016,15000),(11,'Subaru','BRZ',2016,15000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Mazda','MX-5',2016,30000),(3,'Mazda','MX-5',2016,30000),(4,'Mazda','MX-5',2016,30000);
+values (1,'Mazda','MX-5',2016,30000),(2,'Mazda','MX-5',2016,30000),(3,'Mazda','MX-5',2016,30000),(4,'Mazda','MX-5',2016,30000),(5,'Mazda','MX-5',2016,30000),(6,'Mazda','MX-5',2016,30000),(7,'Mazda','MX-5',2016,30000),(8,'Mazda','MX-5',2016,30000),(9,'Mazda','MX-5',2016,30000),(10,'Mazda','MX-5',2016,30000),(11,'Mazda','MX-5',2016,30000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Mazda','Rx-7',1998,20000),(2,'Mazda','Rx-7',1998,20000),(6,'Mazda','Rx-7',1998,20000);
+values (1,'Mazda','Rx-7',1998,20000),(2,'Mazda','Rx-7',1998,20000),(3,'Mazda','Rx-7',1998,20000),(4,'Mazda','Rx-7',1998,20000),(5,'Mazda','Rx-7',1998,20000),(6,'Mazda','Rx-7',1998,20000),(7,'Mazda','Rx-7',1998,20000),(8,'Mazda','Rx-7',1998,20000),(9,'Mazda','Rx-7',1998,20000),(10,'Mazda','Rx-7',1998,20000),(11,'Mazda','Rx-7',1998,20000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Ford','GT',2013,25000),(7,'Ford','GT',2013,25000),(8,'Ford','GT',2013,25000);
+values (1,'Ford','GT',2013,25000),(2,'Ford','GT',2013,25000),(3,'Ford','GT',2013,25000),(4,'Ford','GT',2013,25000),(5,'Ford','GT',2013,25000),(6,'Ford','GT',2013,25000),(7,'Ford','GT',2013,25000),(8,'Ford','GT',2013,25000),(9,'Ford','GT',2013,25000),(10,'Ford','GT',2013,25000),(11,'Ford','GT',2013,25000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Dodge','Hellcat',2015,15000),(6,'Dodge','Hellcat',2015,15000),(9,'Dodge','Hellcat',2015,15000);
+values (1,'Dodge','Hellcat',2015,15000),(2,'Dodge','Hellcat',2015,15000),(3,'Dodge','Hellcat',2015,15000),(4,'Dodge','Hellcat',2015,15000),(5,'Dodge','Hellcat',2015,15000),(6,'Dodge','Hellcat',2015,15000),(7,'Dodge','Hellcat',2015,15000),(8,'Dodge','Hellcat',2015,15000),(9,'Dodge','Hellcat',2015,15000),(10,'Dodge','Hellcat',2015,15000),(11,'Dodge','Hellcat',2015,15000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Toyota','AE86',1983, 20000),(8,'Toyota','AE86',1983, 20000),(11,'Toyota','AE86',1983, 20000);
+values (1,'Toyota','AE86',1983, 20000),(2,'Toyota','AE86',1983, 20000),(3,'Toyota','AE86',1983, 20000),(4,'Toyota','AE86',1983, 20000),(5,'Toyota','AE86',1983, 20000),(6,'Toyota','AE86',1983, 20000),(7,'Toyota','AE86',1983, 20000),(8,'Toyota','AE86',1983, 20000),(9,'Toyota','AE86',1983, 20000),(10,'Toyota','AE86',1983, 20000),(11,'Toyota','AE86',1983, 20000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Toyota','Supra',1992,17000),(3,'Toyota','Supra',1992,17000),(4,'Toyota','Supra',1992,17000);
+values (1,'Toyota','Supra',1992,17000),(2,'Toyota','Supra',1992,17000),(3,'Toyota','Supra',1992,17000),(4,'Toyota','Supra',1992,17000),(5,'Toyota','Supra',1992,17000),(6,'Toyota','Supra',1992,17000),(7,'Toyota','Supra',1992,17000),(8,'Toyota','Supra',1992,17000),(9,'Toyota','Supra',1992,17000),(10,'Toyota','Supra',1992,17000),(11,'Toyota','Supra',1992,17000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'Acura','NSX',2016,10000),(2,'Acura','NSX',2016,10000),(3,'Acura','NSX',2016,10000);
+values (1,'Acura','NSX',2016,10000),(2,'Acura','NSX',2016,10000),(3,'Acura','NSX',2016,10000),(4,'Acura','NSX',2016,10000),(5,'Acura','NSX',2016,10000),(6,'Acura','NSX',2016,10000),(7,'Acura','NSX',2016,10000),(8,'Acura','NSX',2016,10000),(9,'Acura','NSX',2016,10000),(10,'Acura','NSX',2016,10000),(11,'Acura','NSX',2016,10000);
 insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
-values (1,'DanielSon','CardboardBox',1928,10),(5,'DanielSon','CardboardBox',1928,10),(10,'DanielSon','CardboardBox',1928,10);
+values (1,'DanielSon','CardboardBox',1928,10),(2,'DanielSon','CardboardBox',1928,10),(3,'DanielSon','CardboardBox',1928,10),(4,'DanielSon','CardboardBox',1928,10),(5,'DanielSon','CardboardBox',1928,10),(6,'DanielSon','CardboardBox',1928,10),(7,'DanielSon','CardboardBox',1928,10),(8,'DanielSon','CardboardBox',1928,10),(9,'DanielSon','CardboardBox',1928,10),(10,'DanielSon','CardboardBox',1928,10),(11,'DanielSon','CardboardBox',1928,10);
