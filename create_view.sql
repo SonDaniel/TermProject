@@ -27,6 +27,19 @@ MentorShip.MenteeInstance = B.MechanicInstance inner join EmploymentTime E on B.
 E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
 
 #View for Premier Profits
+create view Premier_profits_v as
+(select PremiumCustomer.CustomerID, AnnualFee, Year(RepairOrder.DateOrdered) as 'Year of Repair', Sum(cost) as 'Years Cost'
+from PremiumCustomer inner join Contracted using(CustomerID) inner join Customer using(CustomerID) inner join OwnedVehicle
+using(CustomerID) inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine on 
+RepairOrder.RepairOrderID = RepairLine.RepairOrderID inner join ServiceItem using(ServiceItemID) inner join IndividualService 
+using(ServiceItemID) group by RepairOrder.DateOrdered, CustomerID)
+union
+(select PremiumCustomer.CustomerID, AnnualFee, Year(RepairOrder.DateOrdered) as 'Year of Repair', Sum(cost) as 'Years Cost' 
+from PremiumCustomer inner join Contracted using(CustomerID) inner join Customer using(CustomerID) inner join OwnedVehicle 
+using(CustomerID) inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine on 
+RepairOrder.RepairOrderID = RepairLine.RepairOrderID inner join ServiceItem using(ServiceItemID) inner join MaintenancePackage 
+on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by RepairOrder.DateOrdered, CustomerID)
+order by CustomerID, 'Year of Repair';
 
 
 #View for Prospective Customer Resurrection
