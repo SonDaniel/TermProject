@@ -120,13 +120,13 @@ begin
 	DECLARE carModel VARCHAR(30) Default '';
 	DECLARE k INT DEFAULT 0;
 	
-	DECLARE Cur1 CURSOR FOR Select IndividualService.Cost FROM maintenancepackage inner join servicepackageline
+	DECLARE Cur1 CURSOR FOR Select DISTINCT IndividualService.Cost FROM maintenancepackage inner join servicepackageline
 								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
 								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
 								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
 								where maintenancepackage.MaintenancePackageID = NEW.ServiceitemID;
 								
-	DECLARE Cur2 CURSOR FOR Select PartCatalog.Cost FROM maintenancepackage inner join servicepackageline
+	DECLARE Cur2 CURSOR FOR Select DISTINCT PartCatalog.Cost FROM maintenancepackage inner join servicepackageline
 								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
 								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
 								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
@@ -137,13 +137,16 @@ begin
 								
 		
 	Select DISTINCT OwnedVehicle.Year from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carYear;
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carYear;
 	
 	Select DISTINCT OwnedVehicle.Make from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carMake;
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carMake;
 	
 	Select DISTINCT OwnedVehicle.Model from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carModel;
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carModel;
 				
 		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
 		
@@ -185,11 +188,11 @@ begin
 				
 		ELSE
 		
-			Select IndividualService.Cost FROM ServiceItem
+			Select DISTINCT IndividualService.Cost FROM ServiceItem
 								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
 								where ServiceItem.ServiceItemID = NEW.ServiceitemID into serviceCost;
 								
-			Select PartCatalog.Cost FROM ServiceItem  
+			Select DISTINCT PartCatalog.Cost FROM ServiceItem  
 								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
 								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
 								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
@@ -204,8 +207,8 @@ begin
 		SET Cost = serviceCost + PartCost;
 	
 		
-	Select Distinct CustomerID from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VIN = OwnedVehicle.VIN)
+	Select Distinct Customer.CustomerID from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
 	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
 	where RepairLine.RepairOrderID = New.RepairOrderID into ID;
 		
@@ -223,4 +226,14 @@ end;
 delimiter ;
 
 
+
+
+
+create TRIGGER companyCarLimit
+for each row
+begin
+
+
+
+end
 
