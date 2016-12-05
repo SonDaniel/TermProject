@@ -27,10 +27,21 @@ FROM Employee
 inner join EmploymentTime using(EmployeeID)
 inner join Mechanic on MechanicInstance=EmployeeInstance
 inner join TempCertificate using(MechanicInstance)
-group by EFirstName, ELastName;
+group by EFirstName, ELastName
+HAVING count(CertificateID)>3
+order by 'Number of Skills' desc;
 
 
 -- 5. Find all of the mechanics who have three or more skills in common.
+	/*DELIMITER //
+    Create Procedure NumberOfSkills()
+    BEGIN
+		DECLARE skills INT;
+        SET skills=0;
+        label1:REPEAT
+			
+    END;
+	DELIMITER;*/
 
 -- 6. For each maintenance package, list the total cost of the maintenance package, as well as a list of
 -- all of the maintenance items within that package.
@@ -50,14 +61,30 @@ group by EFirstName, ELastName;
 
 -- 11. List the three suppliers who have supplied us the largest number of parts (not total quantity of
 -- parts, but the largest number of distinct parts) over the past year.
-
+SELECT DISTINCT Supplier.SupplierName, count(PartName)
+FROM Supplier
+inner join PartCatalog using (SupplierName)
+group by SupplierName
+order by count(PartName) desc
+limit 3;
 -- 12. List the five suppliers who have supplied us the largest dollar value of parts in the past year.
+SELECT DISTINCT SupplierName , cost
+From Supplier
+inner join PartCatalog using (SupplierName)
+order by cost desc
+Limit 5;
 
 -- 13. Find the mechanic who is mentoring the most other mechanics. List the skills that the mechanic
 -- is passing along to the other mechanics.
 
 -- 14. Find the three skills that have the fewest mechanics who have those skills.
-
+SELECT ServiceType , count(MechanicInstance)
+From Certificate
+inner join TempCertificate using (CertificateID)
+Group by ServiceType
+Having count(MechanicInstance)
+order by count(MechanicInstance) asc
+limit 3;
 -- 15. List the employees who are both service technicians as well as mechanics.
 SELECT EFirstName, ELastName, EmployeeID
 From Employee
