@@ -79,6 +79,21 @@ Limit 5;
 -- 13. Find the mechanic who is mentoring the most other mechanics. List the skills that the mechanic
 -- is passing along to the other mechanics.
 
+Select DISTINCT MechanicID, MentorFirstName,MentorLastName, ServiceType 
+from   Mechanic_mentor_v 
+inner join TempCertificate on MechanicID= MechanicInstance
+inner join Certificate using(CertificateID)
+inner join MentorShip on MechanicID=MentorShip.MentorInstance
+Where MechanicID =(
+			SELECT MechanicID FROM(
+				  SELECT MechanicID,MentorFirstName ,MentorLastName,MAX(NumberofMentee) as 'NumberofMentee'
+				  FROM (SELECT MechanicID,MentorFirstName, MentorLastName, count(*) as 'NumberofMentee'
+						FROM Mechanic_mentor_v
+						group by MentorFirstName, MentorLastName)t
+			)s
+		) and TempCertificate.CertificateID=MentorShip.CertificateID;
+	
+	
 -- 14. Find the three skills that have the fewest mechanics who have those skills.
 SELECT ServiceType , count(MechanicInstance)
 From Certificate
