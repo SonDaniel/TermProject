@@ -242,6 +242,7 @@ CREATE TABLE IF NOT EXISTS Email (
 	MaintenancePackageID int,
     CustomerID int not null,
     SuggestedDate Date not null,
+    Replied boolean default false,
     primary key (CustomerID, SuggestedDate),
     constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
     constraint fk_CustomerIDEmail foreign key (CustomerID) references Customer (CustomerID)
