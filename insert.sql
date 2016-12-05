@@ -259,10 +259,10 @@ values (1,4,6,'2006-03-01','2006-04-29');
 insert into ServiceItem(ServiceitemID)
 values (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25);
 
-insert into MaintenancePackage(MaintenancePackageID,PackageTitle)
-values(1, 'Oil change package'),(2, 'Tire change package'),(3, 'Air Filter Change Package'),(4, 'Suspension Change Package'),
-(5, 'Wheel Change Package'),(6, 'Battery change package'),(7, 'deluxe oil change package'),(8, 'Fuse change package'),
-(9, 'Belt change package'),(10, 'Break change package'),(11, 'WindShield change package');
+insert into MaintenancePackage(MaintenancePackageID,PackageTitle, Cost)
+values(1, 'Oil change package', 60.00),(2, 'Tire change package', 65.00),(3, 'Air Filter Change Package', 100.00),(4, 'Suspension Change Package', 500.00),
+(5, 'Wheel Change Package', 60.00),(6, 'Battery change package', 225.00),(7, 'deluxe oil change package', 100.00),(8, 'Fuse change package', 60.00),
+(9, 'Belt change package', 300.00),(10, 'Break change package', 200.00),(11, 'WindShield change package', 300.00);
 
 insert into IndividualService(ServiceItemID,Service,Cost,CertificateNeeded)
 values (12,'change oil', 50.55,1),(13,'change oil filter', 100.55,2),(14,'change tire', 50.55,5)

@@ -183,6 +183,7 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
 	MaintenancePackageID int not null primary key,
 	PackageTitle varchar(50),
+	cost Decimal(13,2) not null,
     Constraint UC_MaintenancePackage UNIQUE (PackageTitle),
 	constraint fk_ServicePackage foreign key (MaintenancePackageID) references ServiceItem (ServiceitemID)
 );
