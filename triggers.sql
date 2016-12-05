@@ -251,3 +251,26 @@ DECLARE msg VARCHAR(255);
 end;
 //
 delimiter ;
+
+delimiter //
+create Trigger MentorCertificate before insert ON Mentorship
+for each row
+begin 
+Declare MenteeInst int;
+Declare	MentInst int;
+Declare	CID int;
+Declare	StopTime date;
+Declare	StartTime date;
+set MenteeInst = NEW.MenteeInstance;
+set MentInst = NEW.MentorInstance;
+set CID = NEW.CertificateID;
+set StopTime = NEW.StopTime;
+set StartTime = NEW.StartTime;
+
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+Values(MenteeInst, MentInst,CID,StopTime,StartTime );
+insert into TempCertificate(MechanicInstance,CertificateID)
+values(MenteeInst, CID);
+end;
+//
+delimiter ;
