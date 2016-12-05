@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS Individual (
 	CustomerID int not null primary key,
 	FirstName varchar(20),
 	LastName varchar(20),
+	age int,
 	constraint fk_CustomerIDIndividual foreign key (CustomerID) references Customer (CustomerID)
 );
 
@@ -242,10 +243,394 @@ CREATE TABLE IF NOT EXISTS Email (
 	MaintenancePackageID int,
     CustomerID int not null,
     SuggestedDate Date not null,
+    Replied boolean default false,
     primary key (CustomerID, SuggestedDate),
     constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
     constraint fk_CustomerIDEmail foreign key (CustomerID) references Customer (CustomerID)
 );
+
+#TRIGGERS
+
+
+delimiter //
+create TRIGGER holidayCheck BEFORE INSERT ON RepairOrder
+for each row
+begin
+
+    DECLARE msg VARCHAR(255);
+	DECLARE n INT DEFAULT 0;
+	DECLARE mDay INT DEFAULT 0;
+	DECLARE mMonth INT DEFAULT 0;
+	DECLARE cur CURSOR FOR SELECT holidayDay,holidayMonth FROM Holiday;
+	
+	SELECT COUNT(*) FROM Holiday into n;
+    OPEN cur;
+		WHILE n > 0 DO
+			FETCH cur into mDay, mMonth;
+			
+				if DAY(NEW.DateOrdered) = mDay  AND  MONTH(NEW.DateOrdered) = mMonth then
+					set msg = "You Can't place orders on Holidays";
+					SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+				end if;
+		Set n = n - 1;
+		END WHILE;
+
+
+end;
+//
+delimiter ;
+
+
+
+delimiter //
+create TRIGGER certificateCheck BEFORE INSERT ON RepairLine
+for each row
+begin
+	DECLARE msg VARCHAR(255);
+	DECLARE n INT DEFAULT 0;
+	DECLARE cert INT DEFAULT 0;
+    
+    DECLARE cur1 CURSOR FOR Select CertificateID FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID;
+    
+	
+		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
+			
+            OPEN cur1;
+								
+			Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
+								
+								
+								WHILE n > 0 DO
+									fetch cur1 into cert;
+									
+										if cert not in (Select TempCertificate.CertificateID FROM Mechanic inner join TempCertificate
+																on (Mechanic.MechanicInstance = TempCertificate.MechanicInstance)
+																Where Mechanic.MechanicInstance = NEW.MechanicInstance) then
+											
+											set msg = "Employee not qualified for this maitenance package";
+											SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+										end if;
+									
+									Set n = n - 1;
+								END WHILE;
+		
+		ELSE
+			Select CertificateID FROM ServiceItem
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where ServiceItem.ServiceitemID = NEW.ServiceitemID into cert;
+								
+								if cert not in (Select TempCertificate.CertificateID FROM Mechanic inner join TempCertificate
+																on (Mechanic.MechanicInstance = TempCertificate.MechanicInstance)
+																Where Mechanic.MechanicInstance = NEW.MechanicInstance) then
+											
+											set msg = "Employee not qualified for this service";
+											SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+								end if;
+
+
+
+			
+					
+		end if;
+	
+		
+
+end;
+//
+delimiter ;
+
+
+
+
+delimiter //
+create TRIGGER addLoyaltyPoints AFTER INSERT ON RepairLine
+for each row
+begin
+
+	DECLARE ID int DEFAULT 0;
+    
+	DECLARE n INT DEFAULT 0;
+	DECLARE subCost DECIMAL(13,2) DEFAULT 0;
+	DECLARE serviceCost DECIMAL(13,2) DEFAULT 0;
+	DECLARE partCost DECIMAL(13,2) DEFAULT 0;
+	DECLARE Cost DECIMAL(13,2) DEFAULT 0;
+    
+    DECLARE carYear YEAR(4) DEFAULT 0000;
+	DECLARE carMake VARCHAR(30) Default '';
+	DECLARE carModel VARCHAR(30) Default '';
+	DECLARE k INT DEFAULT 0;
+	
+	DECLARE Cur1 CURSOR FOR Select DISTINCT IndividualService.Cost FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID;
+								
+	DECLARE Cur2 CURSOR FOR Select DISTINCT PartCatalog.Cost FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
+								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
+								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
+								AND MaintenancePackage.MaintenancePackageID = New.ServiceItemID;
+								
+		
+	Select DISTINCT OwnedVehicle.Year from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carYear;
+	
+	Select DISTINCT OwnedVehicle.Make from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carMake;
+	
+	Select DISTINCT OwnedVehicle.Model from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) 
+     Where RepairLine.RepairOrderID = New.RepairOrderID into carModel;
+				
+		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
+		
+			open Cur1;
+			
+			Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
+			
+				While n > 0 DO
+					Fetch Cur1 into subCost;
+					SET serviceCost = serviceCost + subCost;
+				
+					SET n = n - 1;
+				END WHILE;
+				
+				open Cur2;
+				
+				Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
+								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
+								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
+								AND MaintenancePackage.MaintenancePackageID = New.ServiceItemID into k;
+								
+				While k> 0 DO
+					Fetch Cur2 into subCost;
+					SET partCost = partCost + subCost;
+				
+					SET k = k - 1;
+				END WHILE;
+				
+				
+				
+		ELSE
+		
+			Select DISTINCT IndividualService.Cost FROM ServiceItem
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								where ServiceItem.ServiceItemID = NEW.ServiceitemID into serviceCost;
+								
+			Select DISTINCT PartCatalog.Cost FROM ServiceItem  
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
+								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
+								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
+								AND ServiceItem.ServiceItemID = NEW.ServiceitemID into partCost;							
+		
+		end if;
+		
+		
+	
+	
+		SET Cost = serviceCost + PartCost;
+	
+		
+	Select Distinct Customer.CustomerID from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+	where RepairLine.RepairOrderID = New.RepairOrderID into ID;
+		
+		if ID in (Select CustomerID FROM SteadyCustomer) then
+			UPDATE SteadyCustomer SET LoyaltyPoints = LoyaltyPoints + FLOOR(Cost/10)
+			WHERE SteadyCustomer.CustomerID = ID;
+		end if;
+
+	
+		
+	
+
+end;
+//
+delimiter ;
+
+
+
+
+
+delimiter //
+create TRIGGER companyOrderLimit BEFORE INSERT ON RepairOrder
+for each row
+begin
+
+	DECLARE msg VARCHAR(255);
+	DECLARE ID int DEFAULT 0;
+    DECLARE mDATE Date;
+    
+    Select Distinct Customer.CustomerID from RepairOrder 
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+	where RepairOrder.VinNumbers = New.VinNumbers into ID;
+    
+    Set mDATE = New.DateOrdered;
+    
+    if ID in (Select CustomerID FROM Corporation) and mDATE in (Select RepairOrder.DateOrdered From RepairOrder inner join
+				OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+				inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+				where Customer.customerID = ID 
+                GROUP BY RepairOrder.DateOrdered
+                HAVING Count(Customer.customerID) >= 25) then
+    
+		 
+                
+                set msg = "A corporation Can't place more than 25 orders a day";
+				SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+                
+    end if;
+
+end;
+//
+delimiter ;
+
+
+delimiter //
+create TRIGGER invdividualOrderLimit BEFORE INSERT ON RepairOrder
+for each row
+begin
+
+	DECLARE msg VARCHAR(255);
+	DECLARE ID int DEFAULT 0;
+    DECLARE mDATE Date;
+    
+    Select Distinct Customer.CustomerID from RepairOrder 
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+	where RepairOrder.VinNumbers = New.VinNumbers into ID;
+    
+    Set mDATE = New.DateOrdered;
+    
+    if ID in (Select CustomerID FROM Individual) and mDATE in (Select RepairOrder.DateOrdered From RepairOrder inner join
+				OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+				inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+				where Customer.customerID = ID 
+                GROUP BY RepairOrder.DateOrdered
+                HAVING Count(Customer.customerID) >= 5) then
+    
+		 
+                
+                set msg = "An individual Can't place more than 5 orders a day";
+				SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+                
+    end if;
+
+end;
+//
+delimiter ;
+
+
+
+delimiter //
+create Trigger CheckDate before insert on RepairOrder
+for each row
+begin
+DECLARE msg VARCHAR(255);
+	if NEW.DateOrdered > New.RepairDate then
+    set msg = 'Repair date cannot be earlier than Orderdate';
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+	end if;
+end;
+//
+delimiter ;
+
+
+delimiter //
+delimiter //
+create Trigger MentorCertificate After insert ON MentorShip
+for each row
+begin 
+Declare MenteeInst int;
+Declare	CID int;
+set MenteeInst = NEW.MenteeInstance;
+set CID = NEW.CertificateID;
+insert into TempCertificate(MechanicInstance,CertificateID)
+values(MenteeInst, CID);
+end;
+//
+delimiter ;
+
+#View for Customer
+create view Customer_v as
+select FirstName, LastName,(Year(curdate()) - DateJoined) as 'YearsJoined', 'Prospective' as 'CustomerType' from Individual inner join Customer using(CustomerID) 
+inner join ProspectiveCustomer as P using(CustomerID)
+union
+select FirstName, LastName, (Year(curdate()) - DateJoined) as 'YearsJoined', 'Steady' as 'CustomerType' from Individual inner join Customer using(CustomerID)
+inner join Contracted using(CustomerID) inner join SteadyCustomer using(CustomerID)
+union
+select FirstName, LastName, (Year(curdate()) - DateJoined) as 'YearsJoined','Premier' as 'CustomerType' from Individual inner join Customer using(CustomerID)
+inner join Contracted using(CustomerID) inner join PremiumCustomer using(CustomerID);
+
+#View for Customer_addresses
+create view Customer_addresses_v as
+select CustomerID ,'Corporate' as 'CustomerType', street, addressnumber, zipcode from Corporation inner join Customer using(CustomerID)
+inner join Address using(CustomerID)
+union
+select CustomerID, 'Individual' as 'CustomerType', street, addressnumber, zipcode from Individual inner join Customer using(CustomerID)
+inner join Address using(CustomerID);
+
+#View for Mechanic Mentor
+create view Mechanic_mentor_v as
+select Mechanic.MechanicInstance as 'MechanicID', Mentor.EFirstName as 'MentorFirstName', Mentor.ELastName as 'MentorLastName', Mentee.EFirstName as
+'MenteeFirstName', Mentee.ELastName as 'MenteeLastName' from Employee Mentor inner join EmploymentTime using(EmployeeID) inner join Mechanic 
+on EmploymentTime.EmployeeInstance = Mechanic.MechanicInstance inner join TempCertificate using(MechanicInstance) inner join MentorShip on 
+TempCertificate.CertificateID = MentorShip.CertificateID and TempCertificate.MechanicInstance = MentorShip.MentorInstance inner join Mechanic B on
+MentorShip.MenteeInstance = B.MechanicInstance inner join EmploymentTime E on B.MechanicInstance = E.EmployeeInstance inner join Employee Mentee on
+E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
+
+#View for Premier Profits
+create view Premier_profits_v as
+(select PremiumCustomer.CustomerID, AnnualFee, Year(RepairOrder.DateOrdered) as 'Year of Repair', Sum(cost) as 'Years Cost'
+from PremiumCustomer inner join Contracted using(CustomerID) inner join Customer using(CustomerID) inner join OwnedVehicle
+using(CustomerID) inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine on 
+RepairOrder.RepairOrderID = RepairLine.RepairOrderID inner join ServiceItem using(ServiceItemID) inner join IndividualService 
+using(ServiceItemID) group by RepairOrder.DateOrdered, CustomerID)
+union
+(select PremiumCustomer.CustomerID, AnnualFee, Year(RepairOrder.DateOrdered) as 'Year of Repair', Sum(cost) as 'Years Cost' 
+from PremiumCustomer inner join Contracted using(CustomerID) inner join Customer using(CustomerID) inner join OwnedVehicle 
+using(CustomerID) inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine on 
+RepairOrder.RepairOrderID = RepairLine.RepairOrderID inner join ServiceItem using(ServiceItemID) inner join MaintenancePackage 
+on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by RepairOrder.DateOrdered, CustomerID)
+order by CustomerID, 'Year of Repair';
+
+
+#View for Prospective Customer Resurrection
+create view Prospective_resurrection_v as 
+select CustomerID from Email inner join Customer using(CustomerID) 
+inner join ProspectiveCustomer using(CustomerID) group by CustomerID having count(CustomerID) > 3
+union
+select A.CustomerID from Email A inner join Customer using(CustomerID) inner join ProspectiveCustomer using(CustomerID)
+where suggestedDate = (Select max(SuggestedDate) from Email B where B.CustomerID = A.CustomerID) and (year(curdate()) - year(A.suggestedDate)) >= 1;
 
 insert into Employee(EmployeeID, EFirstName, ELastName, Phone)
 values (1,'Jimmy','Chao', '1111111111');
@@ -288,6 +673,12 @@ insert into Customer(CustomerID,Phone,email)#9
  values(1291,'021-427-1231','Matt@Matt.com');
  insert into Customer(CustomerID,Phone,email)#10
  values(1287,'153-237-2411','Damn@Daniel.com');
+insert into Customer(CustomerID,Phone,email)#11
+ Values(1889,'298-631-4416','Funny003@bmail.com');
+insert into Customer(CustomerID,Phone,email)#12
+ values(1738,'999-999-9345','daadwadurtles@fmail.com');
+insert into Customer(CustomerID,Phone,email)#13
+ values(1395, '123-231-1231','Wdae@dmail.com');
  
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1982,'home','Wew St.',124,11111);
@@ -362,7 +753,7 @@ values (1287, 1000000);
 
 
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(1982,50,69);
+values(1982,50,3000);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
 values(003,100,619);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
@@ -381,8 +772,8 @@ values (1,null,1291,'2016-01-01','wire',100000), (2,null,1291,'2016-02-01','wire
 insert into Corporation(CustomerID,CorpName)
 values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
 
-insert into Individual(CustomerID,FirstName,LastName)
-values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
+insert into Individual(CustomerID,FirstName,LastName, age)
+values(1982,'Tops','Kekman',30),(003,'Jimmy','Rustleford',80),(004,'Rusty','Shackleford', 24),(21,'Cat','Fishman', 34),(57,'Mr','Mrson', 54),(5,'Snoopo','Doggo',69),(109,'Kelly','Keller',90),(1021,'Bannana','Man',20);
 
 insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
 values(null,'1990-02-13',1),(null,'1990-02-13',2),('2002-02-14','1990-02-13',3),(null,'1990-02-13',4),(null,'1990-02-13',5),(null,'1990-02-13',6),(null,'1990-02-13',7),(null,'1990-02-13',8),(null,'1990-02-13',9),(null,'1990-02-13',10),(null,'2002-02-14',3);
@@ -796,48 +1187,52 @@ values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 (8,'2015-10-17',9001,1200,'2015-10-17',8,1021,'Toyota','AE86',1983),
 (9,'2015-6-19',9001,1200,'2015-6-19',9,1291,'Toyota','Supra',1992),
 (10,'2004-4-19',9001,1200,'2004-4-19',10,1287,'DanielSon','CardboardBox',1928);
+insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
+values(11,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
+(12,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
+(13,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016);
+
 
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ProspectiveID,ServiceTechnicianInstance )
 values(1,  '2001-3-1','2001-3-8',2,109,8);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ProspectiveID,ServiceTechnicianInstance )
 values(2,  '2005-3-14','2005-3-27',3,1021,10);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(3,  '2001-3-1',  '2001-4-8', 1,9);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(4,  '2001-7-1',  '2001-8-8', 1,8);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(5,  '2010-3-1',  '2010-4-8', 4,10);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(6,  '2011-3-1',  '2011-3-8', 4,10);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(7,  '2012-3-1',  '2012-4-8', 4,8);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(8,  '2004-4-1',  '2004-8-8', 5,9);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(9,  '2004-5-1',  '2004-5-8', 6,8);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(10,  '2011-6-1',  '2011-6-8', 7,10);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(11,  '2012-6-1',  '2012-6-8', 7,9);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(12,  '2013-6-1',  '2013-6-8', 7,8);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(13,  '1999-6-1',  '1999-6-8', 8,9);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(14,  '2013-7-1',  '2013-7-8', 9,9);
-
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(15, '2013-7-1',  '2013-7-8', 10,8);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(16, '2014-7-1',  '2014-7-8', 10,10);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(17,  '2015-7-1',  '2015-7-8', 11,9);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(18, '2015-3-1',  '2015-3-21', 12,8);
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(19, '2015-2-1',  '2015-3-21', 13,10);
+
 
 
 insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
@@ -872,396 +1267,14 @@ insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
 value(17,15,4);
 insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
 value(13,16,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(13,17,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(13,18,1);
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(13,19,1);
 
 insert into Email (MaintenancePackageID, CustomerID, SuggestedDate)
 values (1, 109, '2015-01-01'),(1, 109, '2015-05-01'),(3, 1021, '2014-03-01'),(2, 1021, '2016-01-01'),
 (3, 1021, '2015-04-01'),(3, 1021, '2016-05-01'),(3, 1021, '2016-05-02');
 
-#View for Customer
-create view Customer_v as
-select FirstName, LastName,(Year(curdate()) - DateJoined) as 'YearsJoined', 'Prospective' as 'CustomerType' from Individual inner join Customer using(CustomerID) 
-inner join ProspectiveCustomer as P using(CustomerID)
-union
-select FirstName, LastName, (Year(curdate()) - DateJoined) as 'YearsJoined', 'Steady' as 'CustomerType' from Individual inner join Customer using(CustomerID)
-inner join Contracted using(CustomerID) inner join SteadyCustomer using(CustomerID)
-union
-select FirstName, LastName, (Year(curdate()) - DateJoined) as 'YearsJoined','Premier' as 'CustomerType' from Individual inner join Customer using(CustomerID)
-inner join Contracted using(CustomerID) inner join PremiumCustomer using(CustomerID);
-
-#View for Customer_addresses
-create view Customer_addresses_v as
-select CustomerID ,'Corporate' as 'CustomerType', street, addressnumber, zipcode from Corporation inner join Customer using(CustomerID)
-inner join Address using(CustomerID)
-union
-select CustomerID, 'Individual' as 'CustomerType', street, addressnumber, zipcode from Individual inner join Customer using(CustomerID)
-inner join Address using(CustomerID);
-
-#View for Mechanic Mentor
-create view Mechanic_mentor_v as
-select Mechanic.MechanicInstance as 'MechanicID', Mentor.EFirstName as 'MentorFirstName', Mentor.ELastName as 'MentorLastName', Mentee.EFirstName as
-'MenteeFirstName', Mentee.ELastName as 'MenteeLastName' from Employee Mentor inner join EmploymentTime using(EmployeeID) inner join Mechanic 
-on EmploymentTime.EmployeeInstance = Mechanic.MechanicInstance inner join TempCertificate using(MechanicInstance) inner join MentorShip on 
-TempCertificate.CertificateID = MentorShip.CertificateID and TempCertificate.MechanicInstance = MentorShip.MentorInstance inner join Mechanic B on
-MentorShip.MenteeInstance = B.MechanicInstance inner join EmploymentTime E on B.MechanicInstance = E.EmployeeInstance inner join Employee Mentee on
-E.EmployeeID = Mentee.EmployeeID order by Mentor.EFirstName, Mentor.ELastName, Mentee.EFirstName, Mentee.ELastName;
-
-#View for Premier Profits
-
-
-#View for Prospective Customer Resurrection
-create view Prospective_resurrection_v as 
-select CustomerID from Email inner join Customer using(CustomerID) 
-inner join ProspectiveCustomer using(CustomerID) group by CustomerID having count(CustomerID) > 3
-union
-select A.CustomerID from Email A inner join Customer using(CustomerID) inner join ProspectiveCustomer using(CustomerID)
-where suggestedDate = (Select max(SuggestedDate) from Email B where B.CustomerID = A.CustomerID) and (year(curdate()) - year(A.suggestedDate)) >= 1;
-
-
-#TRIGGERS
-
-
-delimiter //
-create TRIGGER holidayCheck BEFORE INSERT ON RepairOrder
-for each row
-begin
-
-    DECLARE msg VARCHAR(255);
-	DECLARE n INT DEFAULT 0;
-	DECLARE mDay INT DEFAULT 0;
-	DECLARE mMonth INT DEFAULT 0;
-	DECLARE cur CURSOR FOR SELECT holidayDay,holidayMonth FROM Holiday;
-	
-	SELECT COUNT(*) FROM Holiday into n;
-    OPEN cur;
-		WHILE n > 0 DO
-			FETCH cur into mDay, mMonth;
-			
-				if DAY(NEW.DateOrdered) = mDay  AND  MONTH(NEW.DateOrdered) = mMonth then
-					set msg = "You Can't place orders on Holidays";
-					SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
-				end if;
-		Set n = n - 1;
-		END WHILE;
-
-
-end;
-//
-delimiter ;
-
-
-
-delimiter //
-create TRIGGER certificateCheck BEFORE INSERT ON RepairLine
-for each row
-begin
-	DECLARE msg VARCHAR(255);
-	DECLARE n INT DEFAULT 0;
-	DECLARE cert INT DEFAULT 0;
-    
-    DECLARE cur1 CURSOR FOR Select CertificateID FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where maintenancepackage.MaintenancePackageID = NEW.ServiceitemID;
-    
-	
-		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
-			
-            OPEN cur1;
-								
-			Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
-								
-								
-								WHILE n > 0 DO
-									fetch cur1 into cert;
-									
-										if cert not in (Select TempCertificate.CertificateID FROM Mechanic inner join TempCertificate
-																on (Mechanic.MechanicInstance = TempCertificate.MechanicInstance)
-																Where Mechanic.MechanicInstance = NEW.MechanicInstance) then
-											
-											set msg = "Employee not qualified for this maitenance package";
-											SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
-										end if;
-									
-									Set n = n - 1;
-								END WHILE;
-		
-		ELSE
-			Select CertificateID FROM serviceitem
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where Serviceitem.ServiceitemID = NEW.ServiceitemID into cert;
-								
-								if cert not in (Select TempCertificate.CertificateID FROM Mechanic inner join TempCertificate
-																on (Mechanic.MechanicInstance = TempCertificate.MechanicInstance)
-																Where Mechanic.MechanicInstance = NEW.MechanicInstance) then
-											
-											set msg = "Employee not qualified for this service";
-											SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
-								end if;
-
-
-
-			
-					
-		end if;
-	
-		
-
-end;
-//
-delimiter ;
-
-
-
-
-delimiter //
-create TRIGGER addLoyaltyPoints AFTER INSERT ON RepairLine
-for each row
-begin
-
-	DECLARE ID int DEFAULT 0;
-    
-	DECLARE n INT DEFAULT 0;
-	DECLARE subCost DECIMAL(13,2) DEFAULT 0;
-	DECLARE serviceCost DECIMAL(13,2) DEFAULT 0;
-	DECLARE partCost DECIMAL(13,2) DEFAULT 0;
-	DECLARE Cost DECIMAL(13,2) DEFAULT 0;
-    
-    DECLARE carYear YEAR(4) DEFAULT 0000;
-	DECLARE carMake VARCHAR(30) Default '';
-	DECLARE carModel VARCHAR(30) Default '';
-	DECLARE k INT DEFAULT 0;
-	
-	DECLARE Cur1 CURSOR FOR Select IndividualService.Cost FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								where maintenancepackage.MaintenancePackageID = NEW.ServiceitemID;
-								
-	DECLARE Cur2 CURSOR FOR Select PartCatalog.Cost FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
-								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
-								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
-								AND MaintenancePackage.MaintenancePackageID = New.ServiceItemID;
-								
-		
-	Select DISTINCT OwnedVehicle.Year from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carYear;
-	
-	Select DISTINCT OwnedVehicle.Make from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carMake;
-	
-	Select DISTINCT OwnedVehicle.Model from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber) into carModel;
-				
-		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
-		
-			open Cur1;
-			
-			Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
-			
-				While n > 0 DO
-					Fetch Cur1 into subCost;
-					SET serviceCost = serviceCost + subCost;
-				
-					SET n = n - 1;
-				END WHILE;
-				
-				open Cur2;
-				
-				Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
-								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
-								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
-								AND MaintenancePackage.MaintenancePackageID = New.ServiceItemID into k;
-								
-				While k> 0 DO
-					Fetch Cur2 into subCost;
-					SET partCost = partCost + subCost;
-				
-					SET k = k - 1;
-				END WHILE;
-				
-				
-				
-		ELSE
-		
-			Select IndividualService.Cost FROM ServiceItem
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								where ServiceItem.ServiceItemID = NEW.ServiceitemID into serviceCost;
-								
-			Select PartCatalog.Cost FROM ServiceItem  
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
-								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
-								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
-								AND ServiceItem.ServiceItemID = NEW.ServiceitemID into partCost;							
-		
-		end if;
-		
-		
-	
-	
-		SET Cost = serviceCost + PartCost;
-	
-		
-	Select Distinct CustomerID from RepairLine inner join RepairOrder on (RepairLine.RepairOrderID = RepairOrder.RepairOrderID)
-	inner join OwnedVehicle on (RepairOrder.VIN = OwnedVehicle.VIN)
-	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
-	where RepairLine.RepairOrderID = New.RepairOrderID into ID;
-		
-		if ID in (Select CustomerID FROM SteadyCustomer) then
-			UPDATE SteadyCustomer SET LoyaltyPoints = LoyaltyPoints + FLOOR(Cost/10)
-			WHERE SteadyCustomer.CustomerID = ID;
-		end if;
-
-	
-		
-	
-
-end;
-//
-delimiter ;
-
--- 1. List the customers. For each customer, indicate which category he or she fall into, and his or her contact information.
-SELECT FirstName, LastName, 'Individual' AS 'Customer Type',Phone, Email
-From Individual 
-inner join Customer using(CustomerID)
-UNION
-SELECT CorpName AS 'FirstName', 'Corp' AS 'LastName', 'Corporation' AS 'Customer Type',Phone,Email
-FROM Corporation
-inner join Customer using(CustomerID)
-order by LastName asc, FirstName asc;
-#VERSION 2
-SELECT FirstName, LastName, 'N/A' AS 'Corporation Name','Individual' AS 'Customer Type',Phone, Email
-From Individual 
-inner join Customer using(CustomerID)
-UNION
-SELECT 'N/A' AS 'FirstName', 'N/A' AS 'LastName',CorpName AS 'Corporation Name', 'Corporation' AS 'Customer Type',Phone,Email
-FROM Corporation
-inner join Customer using(CustomerID);
-
--- 2. For each service visit, list the total cost to the customer for that visit.
-(select DateOrdered, Customer.CustomerID, OwnedVehicle.VinNumber, RepairOrderID, ServiceItemID, Service as 'Order Name', Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
-OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
-IndividualService using(ServiceItemID) group by DateOrdered, CustomerID)
-union
-(select DateOrdered, Customer.CustomerID, OwnedVehicle.VinNumber, RepairOrderID, ServiceItemID, PackageTitle as 'Order Name', Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
-OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
-MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by DateOrdered, CustomerID) order by RepairOrderID;
-
--- 3. List the top three customers in terms of their net spending for the past two years, and the total
--- that they have spent in that period.
-
--- 4. Find all of the mechanics who have three or more skills.
-SELECT EFirstName, ELastName, count(certificateID) AS 'Number of Skills'
-FROM Employee	
-inner join EmploymentTime using(EmployeeID)
-inner join Mechanic on MechanicInstance=EmployeeInstance
-inner join TempCertificate using(MechanicInstance)
-group by EFirstName, ELastName
-HAVING count(CertificateID)>3
-order by 'Number of Skills' desc;
-
-
--- 5. Find all of the mechanics who have three or more skills in common.
-	/*DELIMITER //
-    Create Procedure NumberOfSkills()
-    BEGIN
-		DECLARE skills INT;
-        SET skills=0;
-        label1:REPEAT
-			
-    END;
-	DELIMITER;*/
-
--- 6. For each maintenance package, list the total cost of the maintenance package, as well as a list of
--- all of the maintenance items within that package.
-
--- 7. Find all of those mechanics who have one or more maintenance items that they lacked one or
--- more of the necessary skills.
-
--- 8. List the customers, sorted by the number of loyalty points that they have, from largest to
--- smallest.
-select CustomerID, FirstName, LastName, LoyaltyPoints from Individual inner join Customer using(CustomerID) 
-inner join Contracted using(CustomerID) inner join SteadyCustomer using(CustomerID) order by LoyaltyPoints desc;
-
--- 9. The premier customers and the difference between what they have paid in the past year, versus
--- the services that they actually used during that same time. List from the customers with the
--- largest difference to the smallest.
-
--- 10. Report on the steady customers based on the net profit that we have made from them over the
--- past year, and the dollar amount of that profit, in order from the greatest to the least.
-
--- 11. List the three suppliers who have supplied us the largest number of parts (not total quantity of
--- parts, but the largest number of distinct parts) over the past year.
-SELECT DISTINCT Supplier.SupplierName, count(PartName)
-FROM Supplier
-inner join PartCatalog using (SupplierName)
-group by SupplierName
-order by count(PartName) desc
-limit 3;
--- 12. List the five suppliers who have supplied us the largest dollar value of parts in the past year.
-SELECT DISTINCT SupplierName , cost
-From Supplier
-inner join PartCatalog using (SupplierName)
-order by cost desc
-Limit 5;
-
--- 13. Find the mechanic who is mentoring the most other mechanics. List the skills that the mechanic
--- is passing along to the other mechanics.
-
-Select DISTINCT MechanicID, MentorFirstName,MentorLastName, ServiceType 
-from   Mechanic_mentor_v 
-inner join TempCertificate on MechanicID= MechanicInstance
-inner join Certificate using(CertificateID)
-inner join MentorShip on MechanicID=MentorShip.MentorInstance
-Where MechanicID =(
-			SELECT MechanicID FROM(
-				  SELECT MechanicID,MentorFirstName ,MentorLastName,MAX(NumberofMentee) as 'NumberofMentee'
-				  FROM (SELECT MechanicID,MentorFirstName, MentorLastName, count(*) as 'NumberofMentee'
-						FROM Mechanic_mentor_v
-						group by MentorFirstName, MentorLastName)t
-			)s
-		) and TempCertificate.CertificateID=MentorShip.CertificateID;
-	
-	
--- 14. Find the three skills that have the fewest mechanics who have those skills.
-SELECT ServiceType , count(MechanicInstance)
-From Certificate
-inner join TempCertificate using (CertificateID)
-Group by ServiceType
-Having count(MechanicInstance)
-order by count(MechanicInstance) asc
-limit 3;
--- 15. List the employees who are both service technicians as well as mechanics.
-SELECT EFirstName, ELastName, EmployeeID
-From Employee
-inner join EmploymentTime using (EmployeeID)
-inner join Mechanic on EmployeeInstance=MechanicInstance
-where EmployeeID in (
-		SELECT EmployeeID
-		From Employee
-		inner join EmploymentTime using (EmployeeID)
-		inner join ServiceTechnician on EmployeeInstance=ServiceTechnicianInstance
-    );
--- 16. Three additional queries that demonstrate the five additional business rules. Feel free to create
--- additional views to support these queries if you so desire.
