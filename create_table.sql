@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS Individual (
 	CustomerID int not null primary key,
 	FirstName varchar(20),
 	LastName varchar(20),
+	age int,
 	constraint fk_CustomerIDIndividual foreign key (CustomerID) references Customer (CustomerID)
 );
 

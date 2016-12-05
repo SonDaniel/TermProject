@@ -132,8 +132,8 @@ values (1,null,1291,'2016-01-01','wire',100000), (2,null,1291,'2016-02-01','wire
 insert into Corporation(CustomerID,CorpName)
 values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
 
-insert into Individual(CustomerID,FirstName,LastName)
-values(1982,'Tops','Kekman'),(003,'Jimmy','Rustleford'),(004,'Rusty','Shackleford'),(21,'Cat','Fishman'),(57,'Mr','Mrson'),(5,'Snoopo','Doggo'),(109,'Kelly','Keller'),(1021,'Bannana','Man');
+insert into Individual(CustomerID,FirstName,LastName, age)
+values(1982,'Tops','Kekman',30),(003,'Jimmy','Rustleford',80),(004,'Rusty','Shackleford', 24),(21,'Cat','Fishman', 34),(57,'Mr','Mrson', 54),(5,'Snoopo','Doggo',69),(109,'Kelly','Keller',90),(1021,'Bannana','Man',20);
 
 insert into EmploymentTime(DateRetired,DateEmployed,EmployeeID)
 values(null,'1990-02-13',1),(null,'1990-02-13',2),('2002-02-14','1990-02-13',3),(null,'1990-02-13',4),(null,'1990-02-13',5),(null,'1990-02-13',6),(null,'1990-02-13',7),(null,'1990-02-13',8),(null,'1990-02-13',9),(null,'1990-02-13',10),(null,'2002-02-14',3);
