@@ -230,7 +230,7 @@ delimiter ;
 
 
 delimiter //
-create TRIGGER companyCarLimit BEFORE INSERT ON RepairOrder
+create TRIGGER companyOrderLimit BEFORE INSERT ON RepairOrder
 for each row
 begin
 
@@ -250,11 +250,46 @@ begin
 				inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
 				where Customer.customerID = ID 
                 GROUP BY RepairOrder.DateOrdered
+                HAVING Count(Customer.customerID) >= 25) then
+    
+		 
+                
+                set msg = "A corporation Can't place more than 25 orders a day";
+				SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+                
+    end if;
+
+end;
+//
+delimiter ;
+
+
+delimiter //
+create TRIGGER invdividualOrderLimit BEFORE INSERT ON RepairOrder
+for each row
+begin
+
+	DECLARE msg VARCHAR(255);
+	DECLARE ID int DEFAULT 0;
+    DECLARE mDATE Date;
+    
+    Select Distinct Customer.CustomerID from RepairOrder 
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+	where RepairOrder.VinNumbers = New.VinNumbers into ID;
+    
+    Set mDATE = New.DateOrdered;
+    
+    if ID in (Select CustomerID FROM Individual) and mDATE in (Select RepairOrder.DateOrdered From RepairOrder inner join
+				OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+				inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+				where Customer.customerID = ID 
+                GROUP BY RepairOrder.DateOrdered
                 HAVING Count(Customer.customerID) >= 5) then
     
 		 
                 
-                set msg = "You Can't place more than 5 orders a day";
+                set msg = "An individual Can't place more than 5 orders a day";
 				SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
                 
     end if;
@@ -281,7 +316,7 @@ delimiter ;
 
 delimiter //
 delimiter //
-create Trigger MentorCertificate After insert ON Mentorship
+create Trigger MentorCertificate After insert ON MentorShip
 for each row
 begin 
 Declare MenteeInst int;
