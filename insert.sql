@@ -598,7 +598,7 @@ values(17,  '2015-7-1',  '2015-7-8', 11,9);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(18, '2015-3-1',  '2015-3-21', 12,8);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(19, '2015-1-1',  '2015-1-21', 13,10);
+values(19, '2015-2-1',  '2015-3-21', 13,10);
 
 
 
