@@ -27,6 +27,16 @@ MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.Maintenance
 
 -- 3. List the top three customers in terms of their net spending for the past two years, and the total
 -- that they have spent in that period.
+select A.Year, CustomerID, Sum(Cost) from 
+((select  Year(RepairDate) as 'Year', Customer.CustomerID, Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+IndividualService using(ServiceItemID) group by CustomerID )
+union
+(select Year(RepairDate) as 'Year', Customer.CustomerID,  Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by CustomerID )) as A group by CustomerID
+having (Year(Curdate()) - A.Year) <= 2;
+-- Note. Because of the data we choosed in our insert, there will be no result. To confirm this, if you change <= 2 to <= 3, it will give results
 
 -- 4. Find all of the mechanics who have three or more skills.
 SELECT EFirstName, ELastName, count(certificateID) AS 'Number of Skills'
@@ -40,20 +50,29 @@ order by 'Number of Skills' desc;
 
 
 -- 5. Find all of the mechanics who have three or more skills in common.
-	/*DELIMITER //
-    Create Procedure NumberOfSkills()
-    BEGIN
-		DECLARE skills INT;
-        SET skills=0;
-        label1:REPEAT
-			
-    END;
-	DELIMITER;*/
+Select DISTINCT M.EF1, M.EL1, M.EF2, M.EL2, count(*) AS 'NUMBER OF SKILLS'
+From
+	(Select S.EFirstName as'EF1', S.ELastName as'EL1', G.EFirstName as 'EF2',G.ELastName as'EL2'
+				  From  (SELECT DISTINCT EFirstName,ELastName,CertificateID,A.EmployeeID FROM Employee A
+						inner join EmploymentTime B on A.EmployeeID=B.EmployeeID
+						inner join Mechanic C on C.MechanicInstance=B.EmployeeInstance
+						inner join TempCertificate D on D.MechanicInstance=C.MechanicInstance) S
+						join
+						(SELECT DISTINCT EFirstName,ELastName,CertificateID,A.EmployeeID FROM Employee A
+						inner join EmploymentTime B on A.EmployeeID=B.EmployeeID
+						inner join Mechanic C on C.MechanicInstance=B.EmployeeInstance
+						inner join TempCertificate D on D.MechanicInstance=C.MechanicInstance) G
+				where S.EmployeeID != G.EmployeeID and S.CertificateID=G.CertificateID) M
+                group by M.EF1, M.EL1, M.EF2, M.EL2
+                Having count(*)>3
+                order by count(*);
 
 -- 6. For each maintenance package, list the total cost of the maintenance package, as well as a list of
 -- all of the maintenance items within that package.
-select PackageTitle as 'Package Title', MaintenancePackage.cost as 'Package Total Cost', IndividualService.Service as 'Package Part' from MaintenancePackage inner join ServicePackageLine using(MaintenancePackageID) 
-inner join ServiceItem using(ServiceItemID) inner join IndividualService using(ServiceItemID) order by PackageTitle;
+select PackageTitle as 'Package Title', MaintenancePackage.cost as 'Package Total Cost', IndividualService.Service as 'Package Part'
+from MaintenancePackage inner join ServicePackageLine using(MaintenancePackageID) 
+	inner join ServiceItem using(ServiceItemID) 
+inner join IndividualService using(ServiceItemID) order by PackageTitle;
 
 -- 7. Find all of those mechanics who have one or more maintenance items that they lacked one or
 -- more of the necessary skills.

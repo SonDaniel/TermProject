@@ -263,3 +263,34 @@ end;
 //
 delimiter ;
 
+
+
+delimiter //
+create Trigger CheckDate before insert on RepairOrder
+for each row
+begin
+DECLARE msg VARCHAR(255);
+	if NEW.DateOrdered < New.RepairDate then
+    set msg = 'Repair date cannot be earlier than Orderdate';
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+	end if;
+end;
+//
+delimiter ;
+
+
+delimiter //
+delimiter //
+create Trigger MentorCertificate After insert ON Mentorship
+for each row
+begin 
+Declare MenteeInst int;
+Declare	CID int;
+set MenteeInst = NEW.MenteeInstance;
+set CID = NEW.CertificateID;
+insert into TempCertificate(MechanicInstance,CertificateID)
+values(MenteeInst, CID);
+end;
+//
+delimiter ;
+
