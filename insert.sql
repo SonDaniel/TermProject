@@ -572,9 +572,9 @@ values (1,'2005-05-05',9001,1200,'2005-05-05',1,1982,'Challenger','Mk2',1998),
 (9,'2015-6-19',9001,1200,'2015-6-19',9,1291,'Toyota','Supra',1992),
 (10,'2004-4-19',9001,1200,'2004-4-19',10,1287,'DanielSon','CardboardBox',1928);
 insert into OwnedVehicle (VinNumber,DateOwned,TotalMiles,YearlyMileage,RegisteredDate,LicenseNumber,CustomerID,Make,Model,Year)
-values(11,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
-(12,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016),
-(13,'2016-12-17',9001,1200,'2016-12-17',3,004,'Subaru','BRZ',2016);
+values(11,'2016-12-17',9001,1200,'2016-12-17',3,1889,'Subaru','BRZ',2016),
+(12,'2016-12-17',9001,1200,'2016-12-17',3,1738,'Subaru','BRZ',2016),
+(13,'2016-12-17',9001,1200,'2016-12-17',3,1395,'Subaru','BRZ',2016);
 
 
 
@@ -616,7 +616,6 @@ insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceT
 values(18, '2015-3-1',  '2015-3-21', 12,8);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(19, '2015-2-1',  '2015-3-21', 13,10);
-
 
 
 insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
