@@ -316,7 +316,7 @@ delimiter ;
 
 delimiter //
 delimiter //
-create Trigger MentorCertificate After insert ON Mentorship
+create Trigger MentorCertificate After insert ON MentorShip
 for each row
 begin 
 Declare MenteeInst int;
