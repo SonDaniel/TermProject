@@ -52,6 +52,8 @@ order by 'Number of Skills' desc;
 
 -- 6. For each maintenance package, list the total cost of the maintenance package, as well as a list of
 -- all of the maintenance items within that package.
+select PackageTitle as 'Package Title', MaintenancePackage.cost as 'Package Total Cost', IndividualService.Service as 'Package Part' from MaintenancePackage inner join ServicePackageLine using(MaintenancePackageID) 
+inner join ServiceItem using(ServiceItemID) inner join IndividualService using(ServiceItemID) order by PackageTitle;
 
 -- 7. Find all of those mechanics who have one or more maintenance items that they lacked one or
 -- more of the necessary skills.
