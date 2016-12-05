@@ -270,7 +270,7 @@ create Trigger CheckDate before insert on RepairOrder
 for each row
 begin
 DECLARE msg VARCHAR(255);
-	if NEW.DateOrdered < New.RepairDate then
+	if NEW.DateOrdered > New.RepairDate then
     set msg = 'Repair date cannot be earlier than Orderdate';
 	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
 	end if;
