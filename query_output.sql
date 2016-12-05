@@ -99,7 +99,32 @@ group by CustomerID
 order by CostDifference ASC);
 -- 10. Report on the steady customers based on the net profit that we have made from them over the
 -- past year, and the dollar amount of that profit, in order from the greatest to the least.
-
+select CustomerID, amountSpent-SUM(Cost), amountSpent
+FROM
+	(select  Year(RepairDate) as 'Years', Customer.CustomerID, Sum(Cost) as 'Cost' 
+	from SteadyCustomer 
+	inner join Contracted using (CustomerID)
+	inner join Customer using (CustomerID)
+	inner join OwnedVehicle using(CustomerID) 
+	inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers 
+	inner join RepairLine using(RepairOrderID) 
+	inner join ServiceItem using(ServiceItemID) 
+	inner join IndividualService using(ServiceItemID) group by CustomerID,Years
+	UNION
+	select Year(RepairDate) as 'Years', SteadyCustomer.CustomerID,  Sum(Cost) as 'Cost'
+	from SteadyCustomer 
+	inner join Contracted using (CustomerID)
+	inner join Customer using (CustomerID)
+	inner join OwnedVehicle using(CustomerID) 
+	inner join RepairOrder on OwnedVehicle.VinNumber = RepairOrder.VinNumbers 
+	inner join RepairLine using(RepairOrderID)
+	inner join ServiceItem using(ServiceItemID) 
+	inner join MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID
+	group by CustomerID,Years) B
+    inner join SteadyCustomer USING(CustomerID)
+	group by CustomerID
+    order by amountSpent desc
+;
 -- 11. List the three suppliers who have supplied us the largest number of parts (not total quantity of
 -- parts, but the largest number of distinct parts) over the past year.
 SELECT DISTINCT Supplier.SupplierName, count(PartName)
