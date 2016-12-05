@@ -20,7 +20,7 @@ inner join Address using(CustomerID);
 #View for Mechanic Mentor
 create view Mechanic_mentor_v as
 select Mechanic.MechanicInstance as 'MechanicID', Mentor.EFirstName as 'MentorFirstName', Mentor.ELastName as 'MentorLastName', Mentee.EFirstName as
-'MenteeFirstName', Mentee.ELastName as 'MenteeLastName' from Employee Mentor inner join EmploymentTime using(EmployeeID) inner join Mechanic 
+'MenteeFirstName', Mentee.ELastName as 'MenteeLastName', Mentorship.CertificateID from Employee Mentor inner join EmploymentTime using(EmployeeID) inner join Mechanic 
 on EmploymentTime.EmployeeInstance = Mechanic.MechanicInstance inner join TempCertificate using(MechanicInstance) inner join MentorShip on 
 TempCertificate.CertificateID = MentorShip.CertificateID and TempCertificate.MechanicInstance = MentorShip.MentorInstance inner join Mechanic B on
 MentorShip.MenteeInstance = B.MechanicInstance inner join EmploymentTime E on B.MechanicInstance = E.EmployeeInstance inner join Employee Mentee on
