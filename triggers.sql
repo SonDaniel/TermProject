@@ -39,7 +39,7 @@ begin
 	DECLARE n INT DEFAULT 0;
 	DECLARE cert INT DEFAULT 0;
     
-    DECLARE cur1 CURSOR FOR Select CertificateID FROM MaintenancePackage inner join servicepackageline
+    DECLARE cur1 CURSOR FOR Select CertificateID FROM MaintenancePackage inner join ServicePackageLine
 								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
 								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
 								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
