@@ -85,7 +85,18 @@ inner join Contracted using(CustomerID) inner join SteadyCustomer using(Customer
 -- 9. The premier customers and the difference between what they have paid in the past year, versus
 -- the services that they actually used during that same time. List from the customers with the
 -- largest difference to the smallest.
-
+(select  Year(RepairDate) as 'Year',PremiumCustomer.CustomerID,PremiumCustomer.AnnualFee- Sum(Cost) as 'CostDifference' from PremiumCustomer inner join Contracted using (CustomerID) inner join Customer using (CustomerID) inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+IndividualService using(ServiceItemID)
+where year(RepairDate) = year(curdate())-interval 1 Year
+group by CustomerID 
+order by CostDifference)
+union
+(select  Year(RepairDate) as 'Year',PremiumCustomer.CustomerID,PremiumCustomer.AnnualFee- Sum(Cost) as 'CostDifference' from PremiumCustomer inner join Contracted using (CustomerID) inner join Customer using (CustomerID) inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID)inner join 
+MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID where year(RepairDate) = year(curdate())-interval 1 Year
+group by CustomerID 
+order by CostDifference);
 -- 10. Report on the steady customers based on the net profit that we have made from them over the
 -- past year, and the dollar amount of that profit, in order from the greatest to the least.
 
