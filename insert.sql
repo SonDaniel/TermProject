@@ -67,6 +67,12 @@ insert into Customer(CustomerID,Phone,email)#13
  values(1291,'Coporate HQ','Gold way.',1812,11111);
  insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
  values(1287,'Corporate HQ','Silver St',0011,11111);
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ values(1889,'home','Bronze St',2222,12111);
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ values(1738,'home','Brown St',8888,11311);
+ insert into Address(CustomerID,AddressType,Street,AddressNumber,ZipCode)
+ values(1395,'home','Keijo St',9999,11411);
  
 insert into VehicleCatalog(Make,Model, Year)#1
 values('Challenger','Mk2',1998);
@@ -107,6 +113,12 @@ insert into Contracted (CustomerID, DateJoined)
 values (1291,'2011');
 insert into Contracted (CustomerID, DateJoined)
 values (1287,'1999');
+insert into Contracted (CustomerID, DateJoined)
+values (1889,'2000');
+insert into Contracted (CustomerID, DateJoined)
+values (1738,'2000');
+insert into Contracted (CustomerID, DateJoined)
+values (1395,'2000');
 
 insert into ProspectiveCustomer (CustomerID,ContractedID,SpecialPromotion,EmailsSent,ReferralCode,ReferralAwards,referralAwardsUsed, DateJoined)
 values (109,003,'free oil change',true,'1234','50 dollars off next purchase',false, '2012');
@@ -117,7 +129,12 @@ insert into PremiumCustomer(CustomerID, AnnualFee)
 values (1291, 1000000);
 insert into PremiumCustomer(CustomerID, AnnualFee)
 values (1287, 1000000);
-
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1889, 1000000);
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1738, 1000000);
+insert into PremiumCustomer(CustomerID, AnnualFee)
+values (1395, 1000000);
 
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
 values(1982,50,3000);
@@ -134,7 +151,7 @@ values(5,69,6900);
 
 
 insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
-values (1,null,1291,'2016-01-01','wire',100000), (2,null,1291,'2016-02-01','wire',100000),(3,null,1287,'2016-01-01','wire',100000), (4,null,1287,'2016-02-01','wire',100000);
+values (1,null,1291,'2016-01-01','wire',100000), (2,null,1291,'2016-02-01','wire',100000),(3,null,1287,'2016-01-01','wire',100000), (4,null,1287,'2016-02-01','wire',100000), (5,null,1889,'2004-02-01','wire',100000), (6,null,1738,'2003-02-01','wire',100000), (7,null,1395,'2005-02-01','wire',100000);
 
 insert into Corporation(CustomerID,CorpName)
 values (1291,'Salt Miners LTD.'),(1287,'Bank of Salt');
