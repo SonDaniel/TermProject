@@ -76,8 +76,9 @@ inner join IndividualService using(ServiceItemID) order by PackageTitle;
 
 -- 7. Find all of those mechanics who have one or more maintenance items that they lacked one or
 -- more of the necessary skills.
-
-
+select MechanicInstance, count(CertificateID) as 'Certificate Count' from Mechanic inner join TempCertificate using(MechanicInstance)
+inner join Certificate using(CertificateID) group by MechanicInstance having count(CertificateID) != 
+(select count(CertificateNeeded) from IndividualService);
 
 -- 8. List the customers, sorted by the number of loyalty points that they have, from largest to
 -- smallest.

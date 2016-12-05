@@ -267,7 +267,7 @@ values(5,1),(5,2),(5,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
 values(6,10),(6,11),(6,12),(6,14);
 insert into TempCertificate(MechanicInstance,CertificateID) 
-values(7,1),(7,2),(7,3),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13),(7,14);
+values(7,1),(7,2),(7,3),(7,4),(7,5),(7,6),(7,7),(7,8),(7,9),(7,10),(7,11),(7,12),(7,13),(7,14);
 
 
 
