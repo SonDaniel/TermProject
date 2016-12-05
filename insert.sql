@@ -661,3 +661,26 @@ value(13,19,1);
 insert into Email (MaintenancePackageID, CustomerID, SuggestedDate)
 values (1, 109, '2015-01-01'),(1, 109, '2015-05-01'),(3, 1021, '2014-03-01'),(2, 1021, '2016-01-01'),
 (3, 1021, '2015-04-01'),(3, 1021, '2016-05-01'),(3, 1021, '2016-05-02');
+
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Challenger','Mk2',1998,10000),(4,'Challenger','Mk2',1998,10000),(8,'Challenger','Mk2',1998,10000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Nissan','370z',2016,10000),(5,'Nissan','370z',2016,10000),(11,'Nissan','370z',2016,10000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Subaru','BRZ',2016,15000),(2,'Subaru','BRZ',2016,15000),(10,'Subaru','BRZ',2016,15000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Mazda','MX-5',2016,30000),(3,'Mazda','MX-5',2016,30000),(4,'Mazda','MX-5',2016,30000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Mazda','Rx-7',1998,20000),(2,'Mazda','Rx-7',1998,20000),(6,'Mazda','Rx-7',1998,20000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Ford','GT',2013,25000),(7,'Ford','GT',2013,25000),(8,'Ford','GT',2013,25000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Dodge','Hellcat',2015,15000),(6,'Dodge','Hellcat',2015,15000),(9,'Dodge','Hellcat',2015,15000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Toyota','AE86',1983, 20000),(8,'Toyota','AE86',1983, 20000),(11,'Toyota','AE86',1983, 20000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Toyota','Supra',1992,17000),(3,'Toyota','Supra',1992,17000),(4,'Toyota','Supra',1992,17000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'Acura','NSX',2016,10000),(2,'Acura','NSX',2016,10000),(3,'Acura','NSX',2016,10000);
+insert into VehiclePackage (MaintenancePackageID,Make,Model,Year,Mileage)
+values (1,'DanielSon','CardboardBox',1928,10),(5,'DanielSon','CardboardBox',1928,10),(10,'DanielSon','CardboardBox',1928,10);
