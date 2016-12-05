@@ -229,11 +229,37 @@ delimiter ;
 
 
 
-create TRIGGER companyCarLimit
+delimiter //
+create TRIGGER companyCarLimit BEFORE INSERT ON RepairOrder
 for each row
 begin
 
+	DECLARE msg VARCHAR(255);
+	DECLARE ID int DEFAULT 0;
+    DECLARE mDATE Date;
+    
+    Select Distinct Customer.CustomerID from RepairOrder 
+	inner join OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+	inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+	where RepairOrder.VinNumbers = New.VinNumbers into ID;
+    
+    Set mDATE = New.DateOrdered;
+    
+    if ID in (Select CustomerID FROM Corporation) and mDATE in (Select RepairOrder.DateOrdered From RepairOrder inner join
+				OwnedVehicle on (RepairOrder.VinNumbers = OwnedVehicle.VinNumber)
+				inner join Customer on (OwnedVehicle.CustomerID = Customer.CustomerID)
+				where Customer.customerID = ID 
+                GROUP BY RepairOrder.DateOrdered
+                HAVING Count(Customer.customerID) >= 5) then
+    
+		 
+                
+                set msg = "You Can't place more than 5 orders a day";
+				SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
+                
+    end if;
 
-
-end
+end;
+//
+delimiter ;
 
