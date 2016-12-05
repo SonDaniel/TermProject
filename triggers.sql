@@ -39,23 +39,23 @@ begin
 	DECLARE n INT DEFAULT 0;
 	DECLARE cert INT DEFAULT 0;
     
-    DECLARE cur1 CURSOR FOR Select CertificateID FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where maintenancepackage.MaintenancePackageID = NEW.ServiceitemID;
+    DECLARE cur1 CURSOR FOR Select CertificateID FROM Maintenancepackage inner join servicepackageline
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID;
     
 	
 		if NEW.ServiceitemID in (SELECT MaintenancePackageID FROM MaintenancePackage) then
 			
             OPEN cur1;
 								
-			Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
+			Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
 								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
 								
 								
@@ -74,10 +74,10 @@ begin
 								END WHILE;
 		
 		ELSE
-			Select CertificateID FROM serviceitem
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
-								where Serviceitem.ServiceitemID = NEW.ServiceitemID into cert;
+			Select CertificateID FROM ServiceItem
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
+								where ServiceItem.ServiceitemID = NEW.ServiceitemID into cert;
 								
 								if cert not in (Select TempCertificate.CertificateID FROM Mechanic inner join TempCertificate
 																on (Mechanic.MechanicInstance = TempCertificate.MechanicInstance)
@@ -120,16 +120,16 @@ begin
 	DECLARE carModel VARCHAR(30) Default '';
 	DECLARE k INT DEFAULT 0;
 	
-	DECLARE Cur1 CURSOR FOR Select DISTINCT IndividualService.Cost FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								where maintenancepackage.MaintenancePackageID = NEW.ServiceitemID;
+	DECLARE Cur1 CURSOR FOR Select DISTINCT IndividualService.Cost FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID;
 								
-	DECLARE Cur2 CURSOR FOR Select DISTINCT PartCatalog.Cost FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
+	DECLARE Cur2 CURSOR FOR Select DISTINCT PartCatalog.Cost FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
 								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
 								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
 								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
@@ -152,11 +152,11 @@ begin
 		
 			open Cur1;
 			
-			Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
-								inner join certificate on(individualservice.CertificateNeeded = certificate.CertificateID)
+			Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
+								inner join Certificate on(IndividualService.CertificateNeeded = Certificate.CertificateID)
 								where MaintenancePackage.MaintenancePackageID = NEW.ServiceitemID into n;
 			
 				While n > 0 DO
@@ -168,10 +168,10 @@ begin
 				
 				open Cur2;
 				
-				Select COUNT(*) FROM maintenancepackage inner join servicepackageline
-								on (maintenancepackage.MaintenancePackageID = servicepackageline.MaintenancePackageID)
-								inner join serviceitem on (servicepackageline.ServiceitemID = serviceitem.ServiceitemID)
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
+				Select COUNT(*) FROM MaintenancePackage inner join ServicePackageLine
+								on (MaintenancePackage.MaintenancePackageID = ServicePackageLine.MaintenancePackageID)
+								inner join ServiceItem on (ServicePackageLine.ServiceitemID = ServiceItem.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
 								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
 								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
 								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel
@@ -189,11 +189,11 @@ begin
 		ELSE
 		
 			Select DISTINCT IndividualService.Cost FROM ServiceItem
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
 								where ServiceItem.ServiceItemID = NEW.ServiceitemID into serviceCost;
 								
 			Select DISTINCT PartCatalog.Cost FROM ServiceItem  
-								inner join individualservice on (serviceitem.ServiceitemID = individualservice.ServiceitemID)
+								inner join IndividualService on (ServiceItem.ServiceitemID = IndividualService.ServiceitemID)
 								inner join PartUsage on(IndividualService.ServiceitemID = PartUsage.IndividualServiceID)
 								inner join PartCatalog on(PartUsage.PartCatalogID = PartCatalog.PartCatalogID)
 								Where PartUsage.Year = carYear AND PartUsage.Make = carMake AND PartUsage.Model = carModel

@@ -120,7 +120,7 @@ values (1287, 1000000);
 
 
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(1982,50,69);
+values(1982,50,3000);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
 values(003,100,619);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
