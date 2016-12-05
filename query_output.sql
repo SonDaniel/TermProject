@@ -77,6 +77,8 @@ inner join IndividualService using(ServiceItemID) order by PackageTitle;
 -- 7. Find all of those mechanics who have one or more maintenance items that they lacked one or
 -- more of the necessary skills.
 
+
+
 -- 8. List the customers, sorted by the number of loyalty points that they have, from largest to
 -- smallest.
 select CustomerID, FirstName, LastName, LoyaltyPoints from Individual inner join Customer using(CustomerID) 
@@ -179,3 +181,16 @@ where EmployeeID in (
     );
 -- 16. Three additional queries that demonstrate the five additional business rules. Feel free to create
 -- additional views to support these queries if you so desire.
+
+#attempted insert of RepairOrder into Holiday
+insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
+values(20, '2015-12-31',  '2016-1-1', 13,10);
+
+#attempted insert into repairLine where employee works on something they are not
+#qualified for
+insert into RepairLine(ServiceitemID,RepairOrderID,MechanicInstance)
+value(25,20,1);
+
+
+#shows loyaltyPoints
+Select * From SteadyCustomer;

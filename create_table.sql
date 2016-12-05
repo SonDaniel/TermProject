@@ -248,3 +248,15 @@ CREATE TABLE IF NOT EXISTS Email (
     constraint fk_ServiceItemIDEmail foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
     constraint fk_CustomerIDEmail foreign key (CustomerID) references Customer (CustomerID)
 );
+
+CREATE TABLE IF NOT EXISTS VehiclePackage
+(
+	MaintenancePackageID int not null,
+	Make varchar(30) not null,
+	Model varchar(30) not null,
+	Year Year(4) not null,
+    Mileage int,
+	constraint fk_VehiclePackage1 foreign key (MaintenancePackageID) references MaintenancePackage (MaintenancePackageID),
+    constraint fk_VehiclePackage2 foreign key (Make,Model,Year) references VehicleCatalog (Make,Model,Year)
+
+);
