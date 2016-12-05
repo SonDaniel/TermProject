@@ -51,6 +51,8 @@ order by 'Number of Skills' desc;
 
 -- 8. List the customers, sorted by the number of loyalty points that they have, from largest to
 -- smallest.
+select CustomerID, FirstName, LastName, LoyaltyPoints from Individual inner join Customer using(CustomerID) 
+inner join Contracted using(CustomerID) inner join SteadyCustomer using(CustomerID) order by LoyaltyPoints desc;
 
 -- 9. The premier customers and the difference between what they have paid in the past year, versus
 -- the services that they actually used during that same time. List from the customers with the

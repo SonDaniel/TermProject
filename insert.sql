@@ -113,17 +113,17 @@ values (1287, 1000000);
 
 
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(1982,0,69);
+values(1982,50,69);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(003,0,619);
+values(003,100,619);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(004,0,2600);
+values(004,99,2600);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
 values(21,0,2000);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(57,0,500);
+values(57,420,500);
 insert into SteadyCustomer(CustomerID,LoyaltyPoints,amountSpent)
-values(5,0,6900);
+values(5,69,6900);
 
 
 insert into MonthlyPayments(PaymentID, ProspectiveID, CustomerID, DateBilled, PaymentMethods,MonthlyCost)
