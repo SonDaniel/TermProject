@@ -255,6 +255,8 @@ insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,Sto
 values (2,4,6,'2007-08-30','2008-02-05');
 insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
 values (1,4,6,'2006-03-01','2006-04-29');
+insert into MentorShip(MenteeInstance,MentorInstance,CertificateID,StartTime,StopTime) 
+values (3,4,12,'2006-03-01','2006-04-29');
 
 insert into ServiceItem(ServiceitemID)
 values (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25);
