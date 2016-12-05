@@ -252,8 +252,9 @@ end;
 //
 delimiter ;
 
+
 delimiter //
-create Trigger MentorCertificate before insert ON Mentorship
+create Trigger MentorCertificate After insert ON Mentorship
 for each row
 begin 
 Declare MenteeInst int;
@@ -274,3 +275,4 @@ values(MenteeInst, CID);
 end;
 //
 delimiter ;
+
