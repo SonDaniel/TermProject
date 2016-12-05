@@ -90,13 +90,13 @@ inner join Contracted using(CustomerID) inner join SteadyCustomer using(Customer
 (select  Year(RepairDate) as 'Year',PremiumCustomer.CustomerID,PremiumCustomer.AnnualFee- Sum(Cost) as 'CostDifference' from PremiumCustomer inner join Contracted using (CustomerID) inner join Customer using (CustomerID) inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
 OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
 IndividualService using(ServiceItemID)
-where year(RepairDate) = year(curdate())-interval 1 Year
+where year(RepairDate) = (SELECT YEAR(DATE(NOW()-INTERVAL 1 year)))
 group by CustomerID 
 order by CostDifference ASC)
 union
 (select  Year(RepairDate) as 'Year',PremiumCustomer.CustomerID,PremiumCustomer.AnnualFee- Sum(Cost) as 'CostDifference' from PremiumCustomer inner join Contracted using (CustomerID) inner join Customer using (CustomerID) inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
 OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID)inner join 
-MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID where year(RepairDate) = year(curdate())-interval 1 Year
+MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID where year(RepairDate) = (SELECT YEAR(DATE(NOW()-INTERVAL 1 year)))
 group by CustomerID 
 order by CostDifference ASC);
 -- 10. Report on the steady customers based on the net profit that we have made from them over the
