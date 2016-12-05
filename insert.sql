@@ -144,38 +144,60 @@ values('Diagnostics',8),('Diagnostics',9),('Diagnostics',10),('Diagnostics',11);
 insert into Mechanic(EmploymentField,MechanicInstance)
 values ('Engine repair',1),('Engine repair',2),('Maintenance',3),('Maintenance',4),('Body repair',5),('Electrical repair',6),('Chasis repair',7);
 
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(1,'oil filter',6.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(2,'oil',17.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(3,'Tires',99.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(4,'Rims',99.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(5,'BreakPads',25.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(6,'Air Filters',29.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(7,'WindShield Wipers',25.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(8,'Wheels',199.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(9,'Fuel Filters',31.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(10,'Air Intake',44.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(11,'Timing Belts',16.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(12,'suspension', 149.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(13,'Fuse',2.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(14,'bolts',2.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(15,'Battery',209.99);
-insert into PartCatalog(PartCatalogID,PartName,Cost)
-values(16,'Wind Shield',999.99);
+insert into Supplier (SupplierName)
+values ('Alex Salty Auto Supply');
+insert into Supplier (SupplierName)
+values ('The Auto Lads');
+insert into Supplier (SupplierName)
+values ('Dank Souls');
+insert into Supplier (SupplierName)
+values ('Weebs are US');
+insert into Supplier (SupplierName)
+values ('Hi Tech');
+insert into Supplier (SupplierName)
+values ('We are Auto');
+insert into Supplier (SupplierName)
+values ('Fancy Auto Parts');
+insert into Supplier (SupplierName)
+values ('Happy Cars');
+insert into Supplier (SupplierName)
+values ('I Like Supplying');
+insert into Supplier (SupplierName)
+values ('GIT GUD');
+
+
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(1,'oil filter',6.99,'Alex Salty Auto Supply');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(2,'oil',17.99,'Alex Salty Auto Supply');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(3,'Tires',99.99,'Weebs are US');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(4,'Rims',99.99,'Happy Cars');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(5,'BreakPads',25.99,'GIT GUD');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(6,'Air Filters',29.99,'Hi Tech');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(7,'WindShield Wipers',25.99,'Hi Tech');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(8,'Wheels',199.99,'The Auto Lads');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(9,'Fuel Filters',31.99,'The Auto Lads');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(10,'Air Intake',44.99,'Fancy Auto Parts');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(11,'Timing Belts',16.99,'Fancy Auto Parts');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(12,'suspension', 149.99,'Dank Souls');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(13,'Fuse',2.99,'Dank Souls');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(14,'bolts',2.99,'Dank Souls');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(15,'Battery',209.99,'Fancy Auto Parts');
+insert into PartCatalog(PartCatalogID,PartName,Cost,SupplierName)
+values(16,'Wind Shield',999.99,'We are Auto');
 
 insert into Certificate(CertificateID,CertificateLevel,ServiceType)
 values(1,1,'oil change');	
@@ -531,19 +553,19 @@ insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,Prospect
 values(2,  '2005-3-14','2005-3-27',3,1021,10);
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(3,  '2001-4-1',  '2001-3-8', 1,9);
+values(3,  '2001-3-1',  '2001-4-8', 1,9);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(4,  '2001-4-1',  '2001-3-8', 1,8);
+values(4,  '2001-7-1',  '2001-8-8', 1,8);
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(5,  '2010-4-1',  '2010-3-8', 4,10);
+values(5,  '2010-3-1',  '2010-4-8', 4,10);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(6,  '2011-4-1',  '2011-3-8', 4,10);
+values(6,  '2011-3-1',  '2011-3-8', 4,10);
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(7,  '2012-4-1',  '2012-3-8', 4,8);
+values(7,  '2012-3-1',  '2012-4-8', 4,8);
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
-values(8,  '2004-5-1',  '2004-4-8', 5,9);
+values(8,  '2004-4-1',  '2004-8-8', 5,9);
 
 insert into RepairOrder(RepairOrderID,DateOrdered,RepairDate,VinNumbers,ServiceTechnicianInstance )
 values(9,  '2004-5-1',  '2004-5-8', 6,8);

@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS ServiceTechnician(
 CREATE TABLE IF NOT EXISTS Certificate(
 	CertificateID int not null primary key,
 	CertificateLevel int,
-	ServiceType varchar(30) not null
+	ServiceType varchar(30) not null,
+	Constraint UC_Certificate UNIQUE (ServiceType)   
 );
 
 CREATE TABLE IF NOT EXISTS TempCertificate(
@@ -57,7 +58,8 @@ CREATE TABLE IF NOT EXISTS MentorShip(
 CREATE TABLE IF NOT EXISTS Customer (
 	CustomerID int not null primary key AUTO_INCREMENT,
 	Phone varchar(12),
-	Email varchar(30)
+	Email varchar(30),
+    Constraint UC_Customer UNIQUE (Phone,Email)
 );
 
 CREATE TABLE IF NOT EXISTS Address (
@@ -158,6 +160,7 @@ CREATE TABLE IF NOT EXISTS RepairOrder (
 	VinNumbers varchar(20),
     ProspectiveID int,
     ServiceTechnicianInstance int,
+    Constraint UC_RepairOrder UNIQUE (VinNumbers,DateOrdered),
 	constraint fk_VehicleRepairOrders foreign key (VinNumbers) references OwnedVehicle (VinNumber),
 	constraint fk_prospectivecustomerid foreign key(ProspectiveID) references ProspectiveCustomer(CustomerID),
     constraint fk_ServiceTechnicians foreign key(ServiceTechnicianInstance) references ServiceTechnician(ServiceTechnicianInstance)
@@ -171,7 +174,6 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 	ServiceitemID int not null,
 	RepairOrderID int not null,
     MechanicInstance int not null,
-	# need subcost
 	primary key (ServiceitemID, RepairOrderID),
 	constraint fk_ServiceRepairLines foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
 	constraint fk_OrderRepairLines foreign key (RepairOrderID) references RepairOrder (RepairOrderID),
@@ -181,6 +183,7 @@ CREATE TABLE IF NOT EXISTS RepairLine (
 CREATE TABLE IF NOT EXISTS MaintenancePackage (
 	MaintenancePackageID int not null primary key,
 	PackageTitle varchar(50),
+    Constraint UC_MaintenancePackage UNIQUE (PackageTitle),
 	constraint fk_ServicePackage foreign key (MaintenancePackageID) references ServiceItem (ServiceitemID)
 );
 
@@ -197,14 +200,22 @@ CREATE TABLE IF NOT EXISTS IndividualService (
 	Service varchar(30),
 	Cost Decimal(13,2),
 	CertificateNeeded int,
+	Constraint UC_IndividualService UNIQUE (Service),
 	constraint fk_ItemIndividualService foreign key (ServiceitemID) references ServiceItem (ServiceitemID),
 	constraint fk_IndividualService_Certificate foreign key (CertificateNeeded) references Certificate (CertificateID)
+);
+
+CREATE TABLE IF NOT EXISTS Supplier(
+	SupplierName varchar(50) primary key
 );
 
 CREATE TABLE IF NOT EXISTS PartCatalog (
 	PartCatalogID int not null primary key AUTO_INCREMENT,
 	PartName varchar(30),
-	Cost Decimal(13,2)
+	Cost Decimal(13,2),
+    SupplierName varchar(50), 
+	Constraint UC_EmployeeInstance UNIQUE (PartName,SupplierName),
+    constraint fk_Supplier foreign key (SupplierName) references Supplier(SupplierName)
 );
 
 CREATE TABLE IF NOT EXISTS PartUsage (
