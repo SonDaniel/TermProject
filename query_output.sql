@@ -27,6 +27,16 @@ MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.Maintenance
 
 -- 3. List the top three customers in terms of their net spending for the past two years, and the total
 -- that they have spent in that period.
+select A.Year, CustomerID, Sum(Cost) from 
+((select  Year(RepairDate) as 'Year', Customer.CustomerID, Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+IndividualService using(ServiceItemID) group by CustomerID )
+union
+(select Year(RepairDate) as 'Year', Customer.CustomerID,  Sum(Cost) as 'Cost' from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by CustomerID )) as A group by CustomerID
+having (Year(Curdate()) - A.Year) <= 2;
+-- Note. Because of the data we choosed in our insert, there will be no result. To confirm this, if you change <= 2 to <= 3, it will give results
 
 -- 4. Find all of the mechanics who have three or more skills.
 SELECT EFirstName, ELastName, count(certificateID) AS 'Number of Skills'
