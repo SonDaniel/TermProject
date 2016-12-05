@@ -237,3 +237,14 @@ begin
 
 end
 
+
+delimiter //
+create Trigger CheckDate before insert on RepairOrder
+for each row
+begin
+	if NEW.DateOrdered < New.RepairDate then
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Repair date cannot be earlier than Orderdate';
+	end if;
+end;
+//
+delimiter ;
