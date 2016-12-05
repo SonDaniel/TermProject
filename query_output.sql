@@ -17,6 +17,13 @@ FROM Corporation
 inner join Customer using(CustomerID);
 
 -- 2. For each service visit, list the total cost to the customer for that visit.
+select DateOrdered, Customer.CustomerID, OwnedVehicle.VinNumber, RepairOrderID, ServiceItemID, Service as 'Order Name', Sum(Cost) from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+IndividualService using(ServiceItemID) group by DateOrdered, CustomerID
+union
+select DateOrdered, Customer.CustomerID, OwnedVehicle.VinNumber, RepairOrderID, ServiceItemID, PackageTitle as 'Order Name', Sum(Cost) from Customer inner join OwnedVehicle using(CustomerID) inner join RepairOrder on
+OwnedVehicle.VinNumber = RepairOrder.VinNumbers inner join RepairLine using(RepairOrderID) inner join ServiceItem using(ServiceItemID) inner join 
+MaintenancePackage on ServiceItem.ServiceitemID = MaintenancePackage.MaintenancePackageID group by DateOrdered, CustomerID;
 
 -- 3. List the top three customers in terms of their net spending for the past two years, and the total
 -- that they have spent in that period.
