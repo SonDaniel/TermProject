@@ -1,22 +1,22 @@
 # TermProject
 
-###Source
+### Source
 [Project Details and Requirements](http://web.csulb.edu/~dbrown/CECS323/Projects/Automotive%20Repair/CECS%20323%20Term%20Project.pdf)
 
-###Description
+### Description
 You are designing a database and proof of concept for Dave’s Automotive, a small auto repair shop that
 specializes in providing preventative maintenance that saves the customer in the end by staying ahead of
 the normal wear and tear on a vehicle.
 
 
-###Diagrams
+### Diagrams
 [UML Diagram](https://www.draw.io/#G0B6-nvjgTV9IpRFhnNGUwME5OcTA)
 
 [Relational Table](https://www.draw.io/#G0B6-nvjgTV9IpaHc2bDk4TVRNMFE)
 
 [Class Definitions Doc](https://docs.google.com/document/d/18Td7zbFxA8wUFt0JFaGKU8QegxKTErjdLjkv1zJ_TWE/edit?usp=sharing)
 
-###Files
+### Files
 * create_table.sql - SQL code for creating the tables.
 * create_view.sql - SQL code for creating views.
 * insert.sql - Insert SQL code for data.
@@ -25,7 +25,7 @@ the normal wear and tear on a vehicle.
 * UML.xml - The UML for the project.
 * relation.xml - The Relational tables for the project.
 
-###Contributors
+### Contributors
 Daniel Son
 
 Jimmy Chao
